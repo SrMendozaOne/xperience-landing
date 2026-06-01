@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Xperience Tech — Sistemas ERP a medida, desarrollo de software, automatización con IA y soluciones industriales con IoT." />
+  <title>Xperience Tech | Inteligencia Digital</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("xperience-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="circuit-bg" aria-hidden="true"></div>
+
+  <header class="site-header" id="site-header">
+    <nav class="nav container" aria-label="Navegación principal">
+      <a href="#home" class="logo logo--full" aria-label="Xperience Tech — Inicio">
+        <span class="logo-x">X</span><span class="logo-rest">perience</span>
+        <span class="logo-tag">Inteligencia Digital</span>
+      </a>
+      <a href="#home" class="logo logo--compact" aria-label="Xperience Xᵖ">
+        <span class="logo-x">X</span><sup class="logo-sup-p">p</sup>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="nav-link">Inicio</a></li>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#suites" class="nav-link">Sistemas</a></li>
+        <li><a href="#planes" class="nav-link">Planes</a></li>
+        <li><a href="#soporte" class="nav-link">Soporte</a></li>
+        <li><a href="#contacto" class="nav-link nav-link--cta">Contacto</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Cambiar modo claro u oscuro">
+          <span class="theme-toggle-track">
+            <span class="theme-toggle-thumb"></span>
+          </span>
+          <span class="theme-toggle-label mono" id="theme-label">OSCURO</span>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="section hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="eyebrow mono">ECOSISTEMAS DE GESTIÓN: DESARROLLO DE SOFTWARE + ERPs o CRMs + IA INTEGRADA</p>
+          <h1 class="hero-title">Tecnología real que potencia <span class="text-gradient">empresas reales</span></h1>
+          <p class="hero-lead">
+            <strong>Xperience Tech</strong> es tu aliado tecnológico estratégico. Especialistas en el desarrollo de software, plataformas y aplicaciones empresariales a medida. Diseñamos e integramos sistemas ERP potentes que unifican IA, analítica de datos e infraestructura IoT para entregar soluciones industriales robustas y de alto rendimiento.
+          </p>
+          <p class="hero-sub">
+            La tecnología correcta no complica tu empresa, <em>la hace avanzar</em>.
+          </p>
+          <div class="hero-actions">
+            <a href="#contacto" class="btn btn-primary">Comenzar optimización</a>
+            <a href="#suites" class="btn btn-pixel" aria-label="Explorar suites productivas">
+              <span class="pixel-label">INICIAR</span>
+            </a>
+          </div>
+          <ul class="hero-stats mono" aria-label="Indicadores clave">
+            <li><strong>ERP</strong><span>Soluciones Industriales</span></li>
+            <li><strong>DEV</strong><span>Software y Aplicaciones</span></li>
+            <li><strong>IoT</strong><span>Datos e Inteligencia Artificial</span></li>
+          </ul>
+        </div>
+        <div class="hero-visual">
+          <div class="terminal-window terminal-window--hero" data-reveal>
+            <div class="terminal-header mono">
+              <span class="terminal-dot terminal-dot--cyan"></span>
+              <span class="terminal-dot terminal-dot--blue"></span>
+              <span class="terminal-dot terminal-dot--muted"></span>
+              <span class="terminal-title">desarrollamos_productividad</span>
+            </div>
+            <pre class="terminal-code mono"><code><span class="tok-kw">const</span> <span class="tok-var">xperience</span> = {
+  <span class="tok-key">software</span>: <span class="tok-str">"aplicaciones_y_plataformas"</span>,
+  <span class="tok-key">erp_industrial</span>: <span class="tok-str">"ia + data + iot"</span>,
+  <span class="tok-key">crm_clientes</span>: <span class="tok-str">"gestión_eficiente"</span>,
+  <span class="tok-key">operación</span>: <span class="tok-str">"tiempo_real"</span>
+};
+<span class="tok-kw">await</span> <span class="tok-var">xperience</span>.<span class="tok-fn">deploy</span>();</code></pre>
+            <div class="terminal-metrics mono">
+              <div class="terminal-metric">
+                <span class="terminal-metric-val" data-counter="-72">-72%</span>
+                <span class="terminal-metric-lbl">CUELLOS DE BOTELLA</span>
+              </div>
+              <div class="terminal-metric">
+                <span class="terminal-metric-val">24/7</span>
+                <span class="terminal-metric-lbl">OPERACIÓN CONTINUA</span>
+              </div>
+              <div class="terminal-metric">
+                <span class="terminal-metric-val">RT</span>
+                <span class="terminal-metric-lbl">PANELES EN VIVO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="section services">
+  <div class="container">
+    <header class="section-header">
+      <p class="eyebrow mono">Áreas de especialidad</p>
+      <h2>Ingeniería de software aplicada a la industria</h2>
+      <p class="section-desc">Tres pilares estratégicos para centralizar tus operaciones, automatizar flujos y conectar tus datos en un entorno digital integrado y seguro.</p>
+    </header>
+    
+    <div class="cards-grid">
+      <article class="service-card service-card--ia" data-reveal>
+        <div class="service-visual service-visual--sphere" aria-hidden="true">
+          <div class="ai-orb">
+            <div class="ai-orb-core"></div>
+            <div class="ai-orb-ring ai-orb-ring--1"></div>
+            <div class="ai-orb-ring ai-orb-ring--2"></div>
+            <div class="ai-orb-ring ai-orb-ring--3"></div>
+          </div>
+        </div>
+        <h3>Sistemas ERP e IA Industrial</h3>
+        <p>Centralización absoluta de tus recursos operativos. Integramos motores de Inteligencia Artificial para la automatización de tareas complejas, planificación inteligente y reducción drástica de errores organizacionales en plantas y oficinas.</p>
+        <ul class="card-list mono">
+          <li>Planificación de recursos centralizada</li>
+          <li>Automatización con Inteligencia Artificial</li>
+          <li>Optimización interna de operaciones</li>
+        </ul>
+      </article>
+
+      <article class="service-card service-card--crm" data-reveal>
+        <div class="service-visual service-visual--vector" aria-hidden="true">
+          <div class="crm-dashboard">
+            <div class="crm-window-header">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+            <div class="crm-chart-bars">
+              <div class="bar bar--1"></div>
+              <div class="bar bar--2"></div>
+              <div class="bar bar--3"></div>
+            </div>
+            <div class="crm-user-node"></div>
+          </div>
+        </div>
+        <h3>Desarrollo de Software, Plataformas y Apps</h3>
+        <p>Construcción de aplicaciones empresariales robustas e infraestructuras digitales a la medida de tu modelo de negocio. Incluye soluciones CRM de alta eficiencia para que la gestión y comunicación con tus clientes sea perfecta.</p>
+        <ul class="card-list mono">
+          <li>Aplicaciones móviles y plataformas web</li>
+          <li>CRM y automatización comercial</li>
+          <li>Arquitecturas de código escalables</li>
+        </ul>
+      </article>
+
+      <article class="service-card service-card--iot" data-reveal>
+        <div class="service-visual service-visual--vector" aria-hidden="true">
+          <div class="iot-network">
+            <div class="iot-node iot-node--center"></div>
+            <div class="iot-node iot-node--peripheral p1"></div>
+            <div class="iot-node iot-node--peripheral p2"></div>
+            <div class="iot-node iot-node--peripheral p3"></div>
+            <div class="iot-pulse-line"></div>
+          </div>
+        </div>
+        <h3>Inteligencia de Datos y Conectividad IoT</h3>
+        <p>Captura, procesamiento y visualización de datos en tiempo real mediante la integración de periféricos y sensores industriales. Información clave dispuesta en paneles gerenciales interactivos para la toma de decisiones.</p>
+        <ul class="card-list mono">
+          <li>Conexión de sensores y periféricos</li>
+          <li>Análisis de datos en tiempo real</li>
+          <li>Reportes operativos automatizados</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- SUITES -->
+    <section id="suites" class="section suites">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow mono">Ecosistemas integrados de gestión</p>
+          <h2>Sistema de Control Industrial y Operativo</h2>
+          <p class="section-desc">Una arquitectura unificada donde el software a medida, los datos de planta y los módulos ERP convergen en una sola plataforma ágil diseñada para operaciones exigentes.</p>
+        </header>
+
+        <div class="suites-showcase">
+          <div class="terminal-window terminal-window--suite" data-reveal>
+            <div class="terminal-header mono">
+              <span class="terminal-dot terminal-dot--cyan"></span>
+              <span class="terminal-dot terminal-dot--blue"></span>
+              <span class="terminal-dot terminal-dot--muted"></span>
+              <span class="terminal-title">sistema_central.erp</span>
+            </div>
+            <pre class="terminal-code mono"><code><span class="tok-kw">const</span> <span class="tok-var">xperience</span> = {
+  <span class="tok-key">software</span>: <span class="tok-str">"aplicaciones_y_plataformas"</span>,
+  <span class="tok-key">erp_industrial</span>: <span class="tok-str">"ia + data + iot"</span>,
+  <span class="tok-key">crm_clientes</span>: <span class="tok-str">"gestión_eficiente"</span>,
+  <span class="tok-key">operación</span>: <span class="tok-str">"tiempo_real"</span>
+};
+<span class="tok-kw">await</span> <span class="tok-var">xperience</span>.<span class="tok-fn">deploy</span>();</code></pre>
+            <div class="terminal-metrics mono">
+              <div class="terminal-metric">
+                <span class="terminal-metric-val">-72%</span>
+                <span class="terminal-metric-lbl">CUELLOS DE BOTELLA</span>
+              </div>
+              <div class="terminal-metric">
+                <span class="terminal-metric-val">24/7</span>
+                <span class="terminal-metric-lbl">OPERACIÓN CONTINUA</span>
+              </div>
+              <div class="terminal-metric">
+                <span class="terminal-metric-val">RT</span>
+                <span class="terminal-metric-lbl">PANELES EN VIVO</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-live" data-reveal aria-label="Panel gerencial en tiempo real">
+            <div class="dashboard-header">
+              <span class="mono dashboard-title">ANALÍTICA OPERATIVA INDUSTRIAL</span>
+              <span class="dashboard-live-badge mono"><span class="pulse-dot"></span> EN VIVO</span>
+            </div>
+            <div class="dashboard-grid">
+              <div class="dash-kpi">
+                <span class="dash-kpi-label mono">REGISTROS PROCESADOS</span>
+                <span class="dash-kpi-value" data-counter="1247">0</span>
+                <span class="dash-kpi-delta mono">+12% vs ayer</span>
+              </div>
+              <div class="dash-kpi">
+                <span class="dash-kpi-label mono">EFICIENCIA EN PLANTA</span>
+                <span class="dash-kpi-value" data-counter="98">0</span>
+                <span class="dash-kpi-delta mono">%</span>
+              </div>
+              <div class="dash-kpi">
+                <span class="dash-kpi-label mono">CUELLOS DE BOTELLA</span>
+                <span class="dash-kpi-value dash-kpi-value--warn" data-counter="3">0</span>
+                <span class="dash-kpi-delta mono">detectados</span>
+              </div>
+            </div>
+            <div class="dashboard-charts">
+              <div class="dash-chart dash-chart--line">
+                <p class="mono dash-chart-title">FLUJO DE DATOS INDUSTRIALES (24H)</p>
+                <svg class="chart-svg" viewBox="0 0 320 100" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(0,243,255,0.35)" />
+                      <stop offset="100%" stop-color="rgba(0,243,255,0)" />
+                    </linearGradient>
+                  </defs>
+                  <path class="chart-area" d="M0,80 L40,70 L80,55 L120,60 L160,40 L200,35 L240,25 L280,30 L320,15 L320,100 L0,100 Z" fill="url(#lineGrad)" />
+                  <path class="chart-line" d="M0,80 L40,70 L80,55 L120,60 L160,40 L200,35 L240,25 L280,30 L320,15" fill="none" stroke="var(--accent-cyan)" stroke-width="2" />
+                </svg>
+              </div>
+              <div class="dash-chart dash-chart--bars">
+                <p class="mono dash-chart-title">RENDIMIENTO POR ETAPA DE SOFTWARE</p>
+                <div class="bar-chart" role="img" aria-label="Gráfico de rendimiento">
+                  <div class="bar-col"><span class="bar-fill-css" style="--h: 72%"></span><span class="mono">ING</span></div>
+                  <div class="bar-col"><span class="bar-fill-css" style="--h: 58%"></span><span class="mono">DATA</span></div>
+                  <div class="bar-col"><span class="bar-fill-css" style="--h: 85%"></span><span class="mono">IA</span></div>
+                  <div class="bar-col"><span class="bar-fill-css" style="--h: 45%"></span><span class="mono">IoT</span></div>
+                  <div class="bar-col bar-col--alert"><span class="bar-fill-css" style="--h: 92%"></span><span class="mono">CUE</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-pipeline mono">
+              <span class="pipeline-node pipeline-node--done">SOFTWARE</span>
+              <span class="pipeline-line"></span>
+              <span class="pipeline-node pipeline-node--done">ERP</span>
+              <span class="pipeline-line"></span>
+              <span class="pipeline-node pipeline-node--active">IA + DATA</span>
+              <span class="pipeline-line"></span>
+              <span class="pipeline-node">IoT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="suite-arch mono" aria-label="Diagrama de flujo tecnológico">
+          <div class="arch-node arch-node--crm">ERP e Infraestructura</div>
+          <div class="arch-connector"></div>
+          <div class="arch-node arch-node--auto">Software y Aplicaciones</div>
+          <div class="arch-connector"></div>
+          <div class="arch-node arch-node--data">IA + Datos + IoT</div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Comparativa de procesos">
+          <button class="tab-btn" role="tab" id="tab-manual" aria-selected="true" aria-controls="panel-manual" data-tab="manual">Procesos Tradicionales</button>
+          <button class="tab-btn" role="tab" id="tab-xperience" aria-selected="false" aria-controls="panel-xperience" data-tab="xperience">Ecosistema Xperience</button>
+        </div>
+
+        <div class="tab-panels">
+          <div class="tab-panel is-active" id="panel-manual" role="tabpanel" aria-labelledby="tab-manual">
+            <div class="compare-col compare-col--bad">
+              <h3 class="mono">Operación fragmentada y aislada</h3>
+              <ul>
+                <li>Datos operativos e inventarios atrapados en hojas de cálculo propensas a fallas</li>
+                <li>Falta de software unificado que conecte la planta con la administración</li>
+                <li>Información industrial desactualizada y reportes con retraso de días</li>
+                <li>Presencia constante de cuellos de botella no detectados a tiempo</li>
+                <li>Gestión manual con clientes sin automatizaciones ni registros unificados</li>
+              </ul>
+              <div class="efficiency-bar">
+                <div class="bar-track"><div class="bar-fill bar-fill--low" data-efficiency="38"></div></div>
+                <span class="efficiency-value mono">38%</span>
+                <span class="efficiency-label">Eficiencia operativa estimada</span>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" id="panel-xperience" role="tabpanel" aria-labelledby="tab-xperience" hidden>
+            <div class="compare-col compare-col--good">
+              <h3 class="mono">Ecosistema industrial unificado</h3>
+              <ul>
+                <li><strong>Sistemas ERP a medida:</strong> Control total de inventarios, finanzas y flujos operativos en un solo lugar</li>
+                <li><strong>Desarrollo de Software y Aplicaciones:</strong> Soluciones digitales optimizadas para la cadena de producción</li>
+                <li><strong>Integración IA + Data + IoT:</strong> Captura automatizada de periféricos y procesamiento inteligente sin errores</li>
+                <li><strong>CRM integrado:</strong> Gestión impecable y automatizada de los requerimientos y relaciones con clientes</li>
+                <li>Detección inmediata de cuellos de botella con alertas preventivas en tiempo real</li>
+              </ul>
+              <div class="efficiency-bar">
+                <div class="bar-track"><div class="bar-fill bar-fill--high" data-efficiency="97"></div></div>
+                <span class="efficiency-value mono">97%</span>
+                <span class="efficiency-label">Eficiencia operativa estimada</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="suite-modules">
+          <div class="module-card">
+            <span class="module-num mono">01</span>
+            <h4>Núcleo ERP e Integración</h4>
+            <p>Control centralizado de flujos empresariales e interconexión ágil de las bases de datos de toda tu compañía.</p>
+          </div>
+          <div class="module-card">
+            <span class="module-num mono">02</span>
+            <h4>Software, Apps y CRM</h4>
+            <p>Desarrollo a medida de plataformas, aplicaciones móviles y herramientas avanzadas para la gestión con tus clientes.</p>
+          </div>
+          <div class="module-card">
+            <span class="module-num mono">03</span>
+            <h4>IA, Datos y Sensores</h4>
+            <p>Orquestación inteligente de información analítica integrada con dispositivos de hardware y periféricos industriales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANES -->
+    <section id="planes" class="section pricing">
+  <div class="container">
+    <header class="section-header">
+      <p class="eyebrow mono">Modelos de implementación</p>
+      <h2>Esquemas adaptados a tu madurez operativa</h2>
+      <p class="section-desc">Desde soluciones puntuales hasta sistemas de gran envergadura para la continuidad crítica de tu negocio — software e ingeniería a tu escala.</p>
+    </header>
+
+    <div class="pricing-grid">
+      <!-- MÓDULO PILOTO -->
+      <article class="pricing-card" data-reveal>
+        <header class="pricing-card-header">
+          <h3>Módulo Piloto</h3>
+          <p class="pricing-subtitle">Optimiza o desarrolla una solución específica</p>
+        </header>
+        <div class="pricing-amounts">
+          <div class="pricing-row">
+            <span class="pricing-label mono">MONTAJE</span>
+            <span class="pricing-value">
+              Desde <strong>$2M</strong> <small class="mono">COP</small> 
+              <span class="pricing-usd mono">/ ~<strong>$500</strong> USD</span>
+            </span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label mono">MENSUAL</span>
+            <span class="pricing-value pricing-value--blue">
+              Desde <strong>$290k</strong> <small class="mono">COP</small> 
+              <span class="pricing-usd mono">/ ~<strong>$75</strong> USD</span>
+            </span>
+          </div>
+        </div>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li>1 desarrollo enfocado (aplicación inicial, panel de datos o módulo específico)</li>
+          <li>Despliegue rápido en un lapso de 5 a 10 días</li>
+          <li>Alojamiento digital y monitoreo básico incluidos</li>
+          <li>Soporte técnico mediante canal de mensajería directa</li>
+        </ul>
+        <a href="#contacto" class="btn btn-outline pricing-cta" data-plan="Piloto">Empezar con un piloto</a>
+      </article>
+
+      <!-- CRECIMIENTO INTEGRAL -->
+      <article class="pricing-card pricing-card--featured" data-reveal>
+        <span class="pricing-badge">🔥 MÁS POPULAR</span>
+        <header class="pricing-card-header">
+          <h3>Crecimiento Integral</h3>
+          <p class="pricing-subtitle">Software robusto e interconexión para empresas en expansión</p>
+        </header>
+        <div class="pricing-amounts">
+          <div class="pricing-row">
+            <span class="pricing-label mono">MONTAJE</span>
+            <span class="pricing-value">
+              Desde <strong>$5M</strong> <small class="mono">COP</small> 
+              <span class="pricing-usd mono">/ ~<strong>$1,250</strong> USD</span>
+            </span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label mono">MENSUAL</span>
+            <span class="pricing-value pricing-value--orange">
+              Desde <strong>$690k</strong> <small class="mono">COP</small> 
+              <span class="pricing-usd mono">/ ~<strong>$175</strong> USD</span>
+            </span>
+          </div>
+        </div>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features pricing-features--orange">
+          <li><strong>Sistemas integrados:</strong> Plataforma web a medida con flujos automatizados e Inteligencia Artificial</li>
+          <li><strong>Solución Conectada:</strong> ERP central básico + CRM interactivo + Panel de datos en tiempo real</li>
+          <li><strong>Entrega ágil y llave en mano</strong> completada en un periodo de 2 a 4 semanas</li>
+          <li><strong>Evolución de talento:</strong> Capacitación técnica y estratégica dirigida a tu equipo de analistas</li>
+          <li><strong>Monitoreo continuo 24/7</strong> y mantenimiento preventivo de infraestructura</li>
+          <li><strong>Auditoría de optimización:</strong> Informes de rendimiento y mitigación de cuellos de botella</li>
+        </ul>
+        <a href="#contacto" class="btn btn-orange pricing-cta" data-plan="Escala Pro">Potenciar mi operación</a>
+      </article>
+
+      <!-- ENTERPRISE / IOT -->
+      <article class="pricing-card" data-reveal>
+        <header class="pricing-card-header">
+          <h3>Enterprise / IoT</h3>
+          <p class="pricing-subtitle">Infraestructura industrial de gran escala para operaciones críticas</p>
+        </header>
+        <div class="pricing-amounts">
+          <div class="pricing-row">
+            <span class="pricing-label mono">MONTAJE</span>
+            <span class="pricing-value pricing-value--blue"><strong>Cotización / Quote</strong></span>
+          </div>
+          <div class="pricing-row">
+            <span class="pricing-label mono">MENSUAL</span>
+            <span class="pricing-value pricing-value--blue"><strong>A medida / Custom</strong></span>
+          </div>
+        </div>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li><strong>Plataformas y aplicaciones ilimitadas</strong> diseñadas sin topes de procesamiento</li>
+          <li><strong>Ecosistema Industrial Completo:</strong> Integración profunda de ERPs avanzados y sistemas heredados</li>
+          <li><strong>Solución de hardware:</strong> Integración de periféricos, sensores automatizados y redes IoT en tiempo real</li>
+          <li><strong>Entorno dedicado:</strong> Servidores exclusivos de alta disponibilidad con acuerdos de servicio del 99.9%</li>
+          <li><strong>Canal de ingeniería preferencial:</strong> Comunicación directa con desarrolladores y arquitectos sénior</li>
+          <li><strong>Acuerdos de confidencialidad estrictos (NDA)</strong> y facturación formal estructurada</li>
+        </ul>
+        <a href="#contacto" class="btn btn-outline pricing-cta" data-plan="Enterprise">Diseñar solución a medida</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- SOPORTE -->
+    <section id="soporte" class="section support">
+      <div class="container support-grid">
+        <div class="support-content">
+          <header class="section-header section-header--left">
+            <p class="eyebrow mono">Acompañamiento tecnológico permanente</p>
+            <h2>Estabilidad operativa, sistemas protegidos</h2>
+            <p class="section-desc">Ingeniería especializada encargada de vigilar, mantener y evolucionar tus aplicaciones, plataformas y arquitecturas de datos para que tu negocio nunca pare.</p>
+          </header>
+          <ul class="support-list">
+            <li>
+              <strong>Monitoreo en vivo</strong>
+              <span>Supervisión constante de software, bases de datos integradas y redes de sensores IoT.</span>
+            </li>
+            <li>
+              <strong>Infraestructura de alta resistencia</strong>
+              <span>Despliegues controlados, copias de seguridad automáticas y planes de contingencia inmediata.</span>
+            </li>
+            <li>
+              <strong>Evolución de software</strong>
+              <span>Mejoras operativas y actualizaciones de código fluidas sin pausas de producción.</span>
+            </li>
+            <li>
+              <strong>Ingeniería a tu disposición</strong>
+              <span>Especialistas técnicos profundamente familiarizados con tu stack de herramientas y operación.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="support-panel" data-reveal>
+          <div class="status-row mono">
+            <span class="status-dot status-dot--ok"></span> Sistemas operativos
+          </div>
+          <div class="status-row mono">
+            <span class="status-dot status-dot--ok"></span> Integraciones sincronizadas
+          </div>
+          <div class="status-row mono">
+            <span class="status-dot status-dot--pulse"></span> Monitoreo activo
+          </div>
+          <p class="support-quote">«La tecnología no debe ser complicada: debe ser útil, escalable y fácil de usar.»</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section contact">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <header class="section-header section-header--left">
+            <p class="eyebrow mono">Consultoría corporativa</p>
+            <h2>Solicita una valoración técnica</h2>
+            <p class="section-desc">Platícanos los desafíos de tu flujo operativo actual. Evaluamos las necesidades de desarrollo, integraciones ERP o arquitecturas IoT necesarias.</p>
+          </header>
+          <address class="contact-details">
+            <p>
+              <span class="contact-label mono">Correo electrónico</span>
+              <a href="mailto:generacionxperience@gmail.com">generacionxperience@gmail.com</a>
+            </p>
+            <p>
+              <span class="contact-label mono">Teléfono de atención</span>
+              <a href="tel:+573022482933">+57 302 248 2933</a>
+            </p>
+          </address>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <label for="nombre">Nombre / Empresa</label>
+            <input type="text" id="nombre" name="nombre" required autocomplete="organization" placeholder="Tu empresa" />
+          </div>
+          <div class="form-row">
+            <label for="email">Correo electrónico corporativo</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="correo@empresa.com" />
+          </div>
+          <div class="form-row">
+            <label for="telefono">Teléfono de contacto</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+57 ..." />
+          </div>
+          <div class="form-row">
+            <label for="mensaje">Describe tus requerimientos técnicos</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Plataforma a medida, sistema ERP, IA, hardware, IoT..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Enviar solicitud de cotización</button>
+          <p class="form-status mono" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="#home" class="logo logo--full logo--footer">
+        <span class="logo-x">X</span><span class="logo-rest">perience</span>
+      </a>
+      <a href="#home" class="logo logo--compact logo--footer-compact" aria-hidden="true">
+        <span class="logo-x">X</span><sup class="logo-sup-p">p</sup>
+      </a>
+      <p class="footer-copy">© <span id="year"></span> Xperience Tech — Inteligencia Digital. Desarrollo de software, sistemas ERP y soluciones industriales.</p>
+    </div>
+  </footer>
+
+  <a
+    href="https://wa.me/573022482933?text=Hola%20Xperience%20Tech%2C%20solicito%20una%20consultor%C3%ADa%20tecnol%C3%B3gica%20sobre%20desarrollo%20de%20software%2C%20sistemas%20ERP%20o%20soluciones%20industriales%20para%20mi%20empresa."
+    class="whatsapp-float"
+    id="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
