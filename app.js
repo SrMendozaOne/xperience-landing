@@ -1,6 +1,6 @@
 /**
- * Xperience Tech — Landing corporativa
- * Vanilla ES6+ | Sin dependencias externas
+ * Xperience Tech & Analytics — Landing
+ * Vanilla ES6+ | Light-first · Sin dependencias
  */
 
 (function () {
@@ -8,11 +8,6 @@
 
   const STORAGE_THEME = "xperience-theme";
   const CONTACT_EMAIL = "generacionxperience@gmail.com";
-  const WHATSAPP_URL =
-    "https://wa.me/573022482933?text=" +
-    encodeURIComponent(
-      "Hola Xperience Tech, solicito una consultoría tecnológica sobre automatización, CRM o soluciones industriales para mi empresa."
-    );
 
   const SELECTORS = {
     header: "#site-header",
@@ -32,6 +27,7 @@
     themeLabel: "#theme-label",
     mensaje: "#mensaje",
     counters: "[data-counter]",
+    quoteTrack: "#quote-track",
   };
 
   const dom = {
@@ -47,11 +43,13 @@
     themeToggle: document.querySelector(SELECTORS.themeToggle),
     themeLabel: document.querySelector(SELECTORS.themeLabel),
     mensaje: document.querySelector(SELECTORS.mensaje),
+    quoteTrack: document.querySelector(SELECTORS.quoteTrack),
   };
 
   function init() {
     if (dom.year) dom.year.textContent = String(new Date().getFullYear());
     initTheme();
+    initQuoteTicker();
     initSmoothScroll();
     initMobileNav();
     initHeaderScroll();
@@ -65,7 +63,7 @@
     initCounters();
   }
 
-  /* ---------- Theme ---------- */
+  /* ---------- Theme (light default) ---------- */
   function getStoredTheme() {
     try {
       const t = localStorage.getItem(STORAGE_THEME);
@@ -73,7 +71,7 @@
     } catch (e) {
       /* ignore */
     }
-    return "dark";
+    return "light";
   }
 
   function applyTheme(theme) {
@@ -84,20 +82,18 @@
     if (dom.themeToggle) {
       dom.themeToggle.setAttribute(
         "aria-label",
-        theme === "light"
-          ? "Activar modo oscuro"
-          : "Activar modo claro"
+        theme === "light" ? "Activar modo oscuro" : "Activar modo claro"
       );
     }
   }
 
   function initTheme() {
     applyTheme(getStoredTheme());
-
     if (!dom.themeToggle) return;
 
     dom.themeToggle.addEventListener("click", () => {
-      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      const current =
+        document.documentElement.getAttribute("data-theme") || "light";
       const next = current === "dark" ? "light" : "dark";
       applyTheme(next);
       try {
@@ -106,6 +102,13 @@
         /* ignore */
       }
     });
+  }
+
+  /* ---------- Quote ticker (duplicate for seamless loop) ---------- */
+  function initQuoteTicker() {
+    if (!dom.quoteTrack) return;
+    const items = dom.quoteTrack.innerHTML;
+    dom.quoteTrack.innerHTML = items + items;
   }
 
   /* ---------- Navigation ---------- */
@@ -151,11 +154,9 @@
 
   function initHeaderScroll() {
     if (!dom.header) return;
-
     const onScroll = () => {
-      dom.header.classList.toggle("is-scrolled", window.scrollY > 24);
+      dom.header.classList.toggle("is-scrolled", window.scrollY > 20);
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
@@ -169,12 +170,11 @@
           if (!entry.isIntersecting) return;
           const id = entry.target.getAttribute("id");
           dom.navLinks.forEach((link) => {
-            const href = link.getAttribute("href");
-            link.classList.toggle("is-active", href === `#${id}`);
+            link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
           });
         });
       },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+      { rootMargin: "-42% 0px -50% 0px", threshold: 0 }
     );
 
     dom.sections.forEach((section) => observer.observe(section));
@@ -206,11 +206,9 @@
     });
 
     panels.forEach((panel) => {
-      const isManual = panel.id === "panel-manual";
-      const isXperience = panel.id === "panel-xperience";
       const show =
-        (tabId === "manual" && isManual) ||
-        (tabId === "xperience" && isXperience);
+        (tabId === "manual" && panel.id === "panel-manual") ||
+        (tabId === "xperience" && panel.id === "panel-xperience");
 
       panel.classList.toggle("is-active", show);
       panel.hidden = !show;
@@ -261,7 +259,7 @@
           obs.unobserve(entry.target);
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.35 }
     );
 
     nodes.forEach((node) => observer.observe(node));
@@ -271,29 +269,30 @@
     const raw = el.getAttribute("data-counter");
     if (raw == null) return;
 
+    const text = el.textContent.trim();
+    if (text.includes("h") || text.includes("/")) return;
+
     const isNegative = String(raw).startsWith("-");
     const target = Math.abs(parseInt(raw, 10));
     if (Number.isNaN(target)) return;
 
-    const hasPercent =
-      el.classList.contains("terminal-metric-val") ||
-      el.textContent.includes("%");
-    const duration = 1400;
-    const start = performance.now();
+    const suffix = el.getAttribute("data-suffix") || (text.includes("%") ? "%" : "");
     const prefix = isNegative ? "-" : "";
+    const duration = 1200;
+    const start = performance.now();
 
     function frame(now) {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3);
       const current = Math.round(target * eased);
-      el.textContent = hasPercent
-        ? `${prefix}${current}%`
+      el.textContent = suffix
+        ? `${prefix}${current}${suffix}`
         : String(isNegative ? -current : current);
 
       if (t < 1) requestAnimationFrame(frame);
       else {
-        el.textContent = hasPercent
-          ? `${prefix}${target}%`
+        el.textContent = suffix
+          ? `${prefix}${target}${suffix}`
           : String(isNegative ? -target : target);
       }
     }
@@ -301,7 +300,7 @@
     requestAnimationFrame(frame);
   }
 
-  /* ---------- Reveal ---------- */
+  /* ---------- Reveal on scroll ---------- */
   function initReveal() {
     const items = document.querySelectorAll(SELECTORS.reveal);
     if (!items.length) return;
@@ -314,7 +313,7 @@
           obs.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
     );
 
     items.forEach((el) => observer.observe(el));
@@ -330,7 +329,7 @@
         if (btn.classList.contains("btn-orange")) {
           e.preventDefault();
           const msg = encodeURIComponent(
-            `Hola Xperience Tech, me interesa el plan ${plan}. Quisiera hablar sobre escalamiento y cotización.`
+            `Hola Xperience Tech, me interesa el plan ${plan}. Quiero hablar sobre escalamiento y cotización.`
           );
           window.open(
             `https://wa.me/573022482933?text=${msg}`,
@@ -374,19 +373,19 @@
       }
 
       const subject = encodeURIComponent(
-        `[Xperience Tech] Cotización — ${nombre}`
+        `[Xperience Tech] Diagnóstico — ${nombre}`
       );
       const body = encodeURIComponent(
         `Empresa / Contacto: ${nombre}\n` +
           `Correo: ${email}\n` +
           `Teléfono: ${telefono || "No indicado"}\n\n` +
           `Mensaje:\n${mensaje}\n\n` +
-          `— Enviado desde landing Xperience Tech`
+          `— Enviado desde landing Xperience Tech & Analytics`
       );
 
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
       setFormStatus(
-        "Se abrió tu cliente de correo. Si no aparece, escríbenos directamente.",
+        "Se abrió tu cliente de correo. Si no aparece, escríbenos por WhatsApp.",
         "ok"
       );
       dom.contactForm.reset();
@@ -397,7 +396,7 @@
     if (!dom.formStatus) return;
     dom.formStatus.textContent = msg;
     dom.formStatus.style.color =
-      type === "error" ? "#ff6b8a" : "var(--accent-cyan)";
+      type === "error" ? "#ef4444" : "var(--accent-cyan)";
   }
 
   /* ---------- WhatsApp float ---------- */
@@ -406,12 +405,12 @@
     if (!el) return;
 
     let ticking = false;
-    const amplitude = 12;
+    const amplitude = 10;
 
     const updatePosition = () => {
       const scrollY = window.scrollY;
-      const offset = Math.sin(scrollY * 0.008) * amplitude;
-      const scale = 1 + Math.min(scrollY * 0.00005, 0.06);
+      const offset = Math.sin(scrollY * 0.007) * amplitude;
+      const scale = 1 + Math.min(scrollY * 0.00004, 0.05);
       el.style.transform = `translateY(${-offset}px) scale(${scale})`;
       ticking = false;
     };
