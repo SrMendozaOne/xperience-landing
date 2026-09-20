@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Xperience Tech & Analytics — Automatizaciones, tableros gerenciales y desarrollo web. De tu Excel a dashboards y flujos que ahorran horas reales." />
+  <meta name="description" content="Xperience Tech & Analytics — Convertimos los requerimientos únicos de tu empresa en software robusto y automatizaciones." />
   <title>Xperience Tech & Analytics | Inteligencia Digital</title>
+  
   <script>
     (function () {
       try {
@@ -13,252 +14,428 @@
       } catch (e) {}
     })();
   </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="noise-overlay"></div>
 
+  <!-- Header -->
   <header class="site-header" id="site-header">
     <nav class="nav container" aria-label="Navegación principal">
-      <a href="#home" class="logo logo--full" aria-label="Xperience Tech — Inicio">
-        <span class="logo-mark" aria-hidden="true"><span class="logo-mark-x"></span></span>
-        <span class="logo-word"><span class="logo-x"></span><span class="logo-rest">perience</span></span>
-        <span class="logo-tag">Tech & Analytics</span>
-      </a>
-      <a href="#home" class="logo logo--compact" aria-label="Xperience Xᵖ">
-        <span class="logo-x">X</span><sup class="logo-sup-p">p</sup>
+      <a href="#home" class="logo" aria-label="Xperience Tech — Inicio">
+        <span class="logo-x">X</span>
+        <span class="logo-text">perience <span class="logo-tag">Tech</span></span>
       </a>
 
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="#home" class="nav-link">Inicio</a></li>
-        <li><a href="#servicios" class="nav-link">Servicios</a></li>
-        <li><a href="#proceso" class="nav-link">Proceso</a></li>
+        <li><a href="#desarrollo" class="nav-link">Desarrollo a Medida</a></li>
+        <li><a href="#contacto" class="nav-link">Agendar Diagnóstico</a></li>
+        <li><a href="#data" class="nav-link">Data & Automatizaciones</a></li>
         <li><a href="#planes" class="nav-link">Planes</a></li>
-        <li><a href="#industrial" class="nav-link nav-link--muted">Industrial</a></li>
-        <li><a href="#contacto" class="nav-link nav-link--cta">Contacto</a></li>
       </ul>
 
       <div class="nav-actions">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Cambiar modo claro u oscuro">
-          <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
-          <span class="theme-toggle-label mono" id="theme-label">CLARO</span>
+          <i data-lucide="moon" class="icon-moon"></i>
+          <i data-lucide="sun" class="icon-sun"></i>
         </button>
         <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
+          <i data-lucide="menu"></i>
         </button>
       </div>
     </nav>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section id="home" class="section hero">
-      <div class="container hero-grid">
+    <!-- HERO SECTION -->
+    <section id="home" class="hero hero-predictive">
+      <canvas id="webgl-canvas" class="hero-neural-canvas" aria-hidden="true"></canvas>
+      <div class="hero-predictive__backdrop" aria-hidden="true"></div>
+      <div class="container hero-container">
         <div class="hero-content">
-          <p class="eyebrow mono">AUTOMATIZACIÓN · DATA · DESARROLLO WEB</p>
-          <h1 class="hero-title">
-            Déjale la gestión de datos a los expertos.
-            <span class="text-gradient">Tu empresa será más eficiente</span>
+          <div class="badge-glow gs-reveal">
+            <span class="pulse-dot"></span>
+            <span class="mono">Predictive Intelligence / Data Science</span>
+          </div>
+          <h1 class="hero-title gs-reveal">
+            Tus datos ya saben qué va a pasar mañana. <span class="text-gradient">Conéctalos a tus decisiones.</span>
           </h1>
-          <p class="hero-lead">
-            Te recibimos desde tu archivo de Excel y lo convertimos en <strong>tableros gerenciales</strong> y <strong>automatizaciones</strong> que eliminan tareas manuales y repetitivas de tu equipo.
+          <p class="hero-lead gs-reveal">
+            Desplegamos modelos predictivos para transformar el volumen de tus datos en decisiones estratégicas. Detectamos variaciones de mercado y riesgos operativos antes de que impacten tus estados financieros.
           </p>
-          <p class="hero-sub">La tecnología correcta no complica tu empresa, <em>la hace avanzar</em>.</p>
-          <div class="hero-actions">
-            <a href="#contacto" class="btn btn-glow">Agenda una sesión de diagnóstico sin costo</a>
-            <a href="https://wa.me/573022482933?text=Hola%20Xperience%20Tech%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20sin%20costo." class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Escríbenos al WhatsApp</a>
+          <div class="hero-actions gs-reveal">
+            <a href="#data" class="btn btn-primary btn-glow btn-magnetic">Anticipa tu mercado <i data-lucide="arrow-up-right"></i></a>
+            <a href="#contacto" class="btn btn-ghost btn-magnetic">
+              <i data-lucide="scan-line"></i> Analiza tu negocio
+            </a>
           </div>
-          <ul class="hero-stats" aria-label="Resultados típicos">
-            <li><strong data-counter="40" data-suffix="%">0</strong><span>más velocidad en métricas clave</span></li>
-            <li><strong data-counter="80" data-suffix="%">0</strong><span>menos tiempo en tareas repetitivas</span></li>
-            <li><strong>48h</strong><span>plan de acción concreto</span></li>
-          </ul>
+          
+          <div class="hero-metrics gs-reveal">
+            <div class="metric-item">
+              <span class="metric-value">+80%</span>
+              <span class="metric-label">Reducción de Tiempos Manuales</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-value">100%</span>
+              <span class="metric-label">Cero Errores de Digitación</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-value">48h</span>
+              <span class="metric-label">Entrega de Plan de Acción</span>
+            </div>
+          </div>
         </div>
 
-        <div class="hero-visual" data-reveal>
-          <div class="transform-card">
-            <div class="transform-side transform-side--excel">
-              <span class="transform-label mono">ANTES · EXCEL</span>
-              <div class="excel-mock">
-                <div class="excel-row excel-row--head"><span>A</span><span>B</span><span>C</span><span>D</span></div>
-                <div class="excel-row"><span>001</span><span>Pendiente</span><span>—</span><span>???</span></div>
-                <div class="excel-row"><span>002</span><span>Copiar</span><span>Pegar</span><span>Revisar</span></div>
-                <div class="excel-row excel-row--warn"><span>003</span><span>Error</span><span>#REF!</span><span>Manual</span></div>
+        <div class="hero-visual hero-predictive__visual gs-reveal">
+          <!-- PLACEHOLDER IMG: Sustituir el fondo por el prompt de tormenta eléctrica y cerebro computacional indicado en el brief. -->
+          <div class="hero-storm-placeholder 3d-tilt-card" role="img" aria-label="Placeholder: tormenta eléctrica sobre un skyline corporativo, entrelazada con un cerebro computacional de nodos neuronales y flujos predictivos">
+            <div class="hero-storm-placeholder__grid"></div>
+            <div class="hero-storm-placeholder__brain"><i data-lucide="brain-circuit"></i></div>
+            <div class="hero-storm-placeholder__signal signal-one"></div>
+            <div class="hero-storm-placeholder__signal signal-two"></div>
+            <span class="hero-storm-placeholder__label mono">Forecast engine / live</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREDICTIVE INTELLIGENCE SHOWCASE -->
+    <section class="predictive-showcase" aria-label="Soluciones de inteligencia predictiva">
+      <div class="container predictive-showcase__header">
+        <span class="eyebrow mono">The predictive advantage</span>
+        <p>Antes del caos corporativo, siempre hay patrones. Anticípate</p>
+      </div>
+      <div class="carousel-wrapper predictive-carousel-wrapper">
+        <div class="carousel-container predictive-carousel" id="software-carousel">
+          <article class="carousel-item predictive-card active" data-index="0">
+            <!-- PLACEHOLDER IMG: Imagen hiperrealista de cerebro computarizado 3D con curvas de riesgo y predicción financiera. -->
+            <div class="predictive-card__image predictive-card__image--brain" role="img" aria-label="Placeholder: cerebro computarizado 3D con circuitos neuronales, curvas de riesgo y tendencias predictivas"></div>
+            <div class="predictive-card__content">
+              <span class="mono">01 / Data Science</span>
+              <h2>Predicción de riesgo & ventas</h2>
+              <p>Modelos que identifican patrones, oportunidades y desviaciones antes de que impacten tu operación.</p>
+            </div>
+          </article>
+          <article class="carousel-item predictive-card" data-index="1">
+            <!-- PLACEHOLDER IMG: Imagen hiperrealista de dashboards holográficos y procesamiento industrial de datos. -->
+            <div class="predictive-card__image predictive-card__image--analytics" role="img" aria-label="Placeholder: dashboards holográficos y procesamiento industrial de datos en tiempo real"></div>
+            <div class="predictive-card__content">
+              <span class="mono">02 / Business Intelligence</span>
+              <h2>Analítica para decidir</h2>
+              <p>Una única lectura de tu negocio para convertir datos dispersos en decisiones claras y ejecutables.</p>
+            </div>
+          </article>
+          <article class="carousel-item predictive-card" data-index="2">
+            <!-- PLACEHOLDER IMG: Imagen hiperrealista de nodos interconectados en cadena de suministro y entorno corporativo. -->
+            <div class="predictive-card__image predictive-card__image--automation" role="img" aria-label="Placeholder: nodos interconectados, automatización IA y cadena de suministro corporativa"></div>
+            <div class="predictive-card__content">
+              <span class="mono">03 / IA Operativa</span>
+              <h2>Automatización que aprende</h2>
+              <p>Software de gestión y procesos inteligentes que reducen fricción mientras tu empresa gana velocidad.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="carousel-controls predictive-carousel-controls" aria-label="Controles del showcase">
+        <button class="carousel-btn" id="prev-slide" type="button" aria-label="Panel anterior"><i data-lucide="arrow-left"></i></button>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <button class="carousel-btn" id="next-slide" type="button" aria-label="Panel siguiente"><i data-lucide="arrow-right"></i></button>
+      </div>
+    </section>
+
+    <!-- SECTION 1: DESARROLLO & INTELIGENCIA DE NEGOCIO -->
+    <section id="desarrollo" class="desarrollo-section">
+      <!-- Propuesta de valor central -->
+      <div class="desarrollo-intro">
+        <div class="container">
+          <div class="section-header text-center gs-reveal-up">
+            <span class="eyebrow mono">Decisiones que se toman con base</span>
+            <h2 class="desarrollo-headline">Tomamos la gestión total de tus datos y la convertimos en <span class="text-gradient">decisiones de negocio inteligentes.</span></h2>
+            <p class="section-desc">Convertimos los requerimientos únicos de tu empresa en software robusto, escalable y fácil de usar. Desde plataformas web de alto impacto hasta sistemas internos que reemplazan procesos caóticos. Diseñamos soluciones digitales a la medida exacta de tu operación.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fundamentos y Operación -->
+      <div class="macro-block macro-block-a" id="fundamentos">
+        <div class="container">
+          <div class="macro-block-header gs-reveal-up">
+            <span class="eyebrow mono">Fundamentos & Operación</span>
+            <h2>Fundamentos digitales para <span class="text-gradient">operar y escalar con precisión.</span></h2>
+          </div>
+        </div>
+
+        <div class="pin-spacer pin-spacer-a" data-panel-count="4">
+          <div class="pin-container pin-container-a">
+            <!-- Panel 1: Landing Pages -->
+            <article class="service-panel" data-index="0">
+              <!-- PLACEHOLDER IMG: Reemplazar con imagen hiperrealista de laptop en escritorio minimalista con sitio web corporativo -->
+              <div class="service-panel__bg bg-a-1" role="img" aria-label="Placeholder: Escritorio corporativo con landing page en pantalla ultrawide, iluminación tenue y ambiente tecnológico premium"></div>
+              <div class="service-panel__overlay"></div>
+              <div class="service-panel__content">
+                <span class="service-panel__index mono">01</span>
+                <div class="service-icon icon-glow-cyan"><i data-lucide="monitor-smartphone"></i></div>
+                <h3>Landing Pages & Sitios Web Corporativos</h3>
+                <p>Presencia de marca imponente y velocidad ultra rápida. Diseñadas para conversión B2B con métricas integradas.</p>
+                <a href="#contacto" class="btn btn-liquid btn-magnetic">Explorar solución <i data-lucide="arrow-right"></i></a>
               </div>
-            </div>
-            <div class="transform-arrow" aria-hidden="true">
-              <span class="transform-arrow-icon">→</span>
-            </div>
-            <div class="transform-side transform-side--dash">
-              <span class="transform-label mono">DESPUÉS · DASHBOARD</span>
-              <div class="mini-dash">
-                <div class="mini-dash-kpis">
-                  <div><span class="mono">FOLIOS</span><strong>1.247</strong></div>
-                  <div><span class="mono">SLA</span><strong>98%</strong></div>
+            </article>
+
+            <!-- Panel 2: CRMs -->
+            <article class="service-panel" data-index="1">
+              <!-- PLACEHOLDER IMG: Reemplazar con imagen hiperrealista de tablet con dashboard CRM en oficina moderna -->
+              <div class="service-panel__bg bg-a-2" role="img" aria-label="Placeholder: Tablet flotando sobre mesa de vidrio con interfaz CRM, tonos azules corporativos"></div>
+              <div class="service-panel__overlay"></div>
+              <div class="service-panel__content">
+                <span class="service-panel__index mono">02</span>
+                <div class="service-icon icon-glow-blue"><i data-lucide="users"></i></div>
+                <h3>CRMs & Portales de Clientes Empresariales</h3>
+                <p>Gestión de ventas y autogestión sin licencias costosas por usuario. Acceso seguro 24/7 para tus clientes.</p>
+                <a href="#contacto" class="btn btn-liquid btn-magnetic">Explorar solución <i data-lucide="arrow-right"></i></a>
+              </div>
+            </article>
+
+            <!-- Panel 3: ERPs -->
+            <article class="service-panel" data-index="2">
+              <!-- PLACEHOLDER IMG: Reemplazar con imagen hiperrealista de centro de operaciones con pantallas ERP -->
+              <div class="service-panel__bg bg-a-3" role="img" aria-label="Placeholder: Centro de control logístico con múltiples monitores mostrando inventarios y facturación en tiempo real"></div>
+              <div class="service-panel__overlay"></div>
+              <div class="service-panel__content">
+                <span class="service-panel__index mono">03</span>
+                <div class="service-icon icon-glow-purple"><i data-lucide="layers"></i></div>
+                <h3>ERPs & Software Operativo Integral</h3>
+                <p>Sistemas centrales para inventarios, facturación, logística y control operativo total. Tu empresa en una sola pantalla.</p>
+                <a href="#contacto" class="btn btn-liquid btn-magnetic">Explorar solución <i data-lucide="arrow-right"></i></a>
+              </div>
+            </article>
+
+            <!-- Panel 4: Cotizadores -->
+            <article class="service-panel" data-index="3">
+              <!-- PLACEHOLDER IMG: Reemplazar con imagen hiperrealista de smartphone con cotizador interactivo -->
+              <div class="service-panel__bg bg-a-4" role="img" aria-label="Placeholder: Mano sosteniendo smartphone con interfaz de cotización dinámica, fondo desenfocado urbano nocturno"></div>
+              <div class="service-panel__overlay"></div>
+              <div class="service-panel__content">
+                <span class="service-panel__index mono">04</span>
+                <div class="service-icon icon-glow-orange"><i data-lucide="calculator"></i></div>
+                <h3>Cotizadores Interactivos de Alta Conversión</h3>
+                <p>Automatiza la generación de propuestas comerciales complejas en segundos, conectadas a tu base de precios.</p>
+                <a href="#contacto" class="btn btn-liquid btn-magnetic">Explorar solución <i data-lucide="arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divisor dramático A → B -->
+      <div class="block-divider" aria-hidden="true">
+        <svg class="block-divider__svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="divider-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgba(6,182,212,0)" />
+              <stop offset="50%" stop-color="rgba(6,182,212,0.6)" />
+              <stop offset="100%" stop-color="rgba(124,58,237,0)" />
+            </linearGradient>
+          </defs>
+          <path d="M0,60 L720,0 L1440,60 L1440,120 L0,120 Z" fill="currentColor" />
+          <line x1="0" y1="60" x2="1440" y2="60" stroke="url(#divider-glow)" stroke-width="2" />
+        </svg>
+        <div class="block-divider__glow"></div>
+      </div>
+
+      <!-- BLOQUE B: Inteligencia y Estrategia -->
+      <div class="macro-block macro-block-b" id="data">
+        <div class="container">
+          <div class="macro-block-header gs-reveal-up">
+            <span class="eyebrow mono">Inteligencia & Estrategia</span>
+            <h2>Inteligencia aplicada para <span class="text-gradient">decidir con ventaja.</span></h2>
+            <p class="section-desc">Diseñamos pipelines de datos interconectados que actúan como el sistema nervioso digital de tu operación.</p>
+          </div>
+        </div>
+
+        <div class="pin-spacer pin-spacer-b" data-panel-count="3">
+          <div class="pin-container pin-container-b">
+            <!-- Panel 1: BI -->
+            <article class="service-panel service-panel--intel" data-index="0">
+              <!-- PLACEHOLDER IMG: Hologramas de modelos predictivos financieros sobre sala de juntas -->
+              <div class="service-panel__bg bg-b-1" role="img" aria-label="Placeholder: Hologramas de modelos predictivos financieros proyectados en sala de juntas corporativa con iluminación fría"></div>
+              <div class="service-panel__overlay service-panel__overlay--deep"></div>
+              <div class="service-panel__content">
+                <span class="service-panel__index mono">01</span>
+                <div class="intel-card-glow">
+                  <div class="service-icon icon-glow-blue"><i data-lucide="pie-chart"></i></div>
+                  <h3>Business Intelligence & Power BI Empresarial</h3>
+                  <p>Visualiza la verdad de tu negocio en tiempo real. Cruza datos automáticamente y elimina los comités basados en hojas de cálculo desactualizadas.</p>
+                  <ul class="service-features mono">
+                    <li><i data-lucide="check"></i> Power BI / Tableau</li>
+                    <li><i data-lucide="check"></i> KPIs en Vivo</li>
+                  </ul>
+                  <a href="#contacto" class="btn btn-liquid btn-magnetic">Agendar diagnóstico <i data-lucide="arrow-right"></i></a>
                 </div>
-                <svg class="mini-chart" viewBox="0 0 200 60" aria-hidden="true">
-                  <path d="M0,50 L30,42 L60,35 L90,38 L120,22 L150,18 L180,25 L200,10" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5"/>
-                </svg>
-                <span class="mini-dash-live mono"><span class="pulse-dot"></span> EN VIVO</span>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </article>
 
-      <div class="quote-ticker" aria-live="polite">
-        <div class="quote-ticker-track" id="quote-track">
-          <span class="quote-item">¿Cuántas horas pagas al mes solo por mover datos de un lado a otro?</span>
-          <span class="quote-item">Tu equipo debería analizar estrategia, no hacer copiar y pegar.</span>
-          <span class="quote-item">Tres cifras distintas en comité = problema de modelo de datos, no de equipo.</span>
-          <span class="quote-item">Reportes de la semana pasada = conducir mirando solo el retrovisor.</span>
+            <!-- Panel 2: Automatización -->
+            <article class="service-panel service-panel--intel" data-index="1">
+              <!-- PLACEHOLDER IMG: Nodos de datos neuronales conectando servidores empresariales -->
+              <div class="service-panel__bg bg-b-2" role="img" aria-label="Placeholder: Nodos de datos neuronales conectando servidores empresariales en centro de datos con luces azules"></div>
+              <div class="service-panel__overlay service-panel__overlay--deep"></div>
+              <div class="service-panel__content">
+                <span class="service-panel__index mono">02</span>
+                <div class="intel-card-glow">
+                  <div class="service-icon icon-glow-purple"><i data-lucide="workflow"></i></div>
+                  <h3>Automatización Inteligente de Procesos</h3>
+                  <p>Haz que tus aplicaciones, correo, WhatsApp y Excel se hablen solos. Liberamos a tu equipo de tareas mecánicas con Python y Apps Script.</p>
+                  <ul class="service-features mono">
+                    <li><i data-lucide="check"></i> Python Scripts</li>
+                    <li><i data-lucide="check"></i> Zapier / Make</li>
+                  </ul>
+                  <a href="#contacto" class="btn btn-liquid btn-magnetic">Agendar diagnóstico <i data-lucide="arrow-right"></i></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Panel 3: Ingeniería de Datos -->
+            <article class="service-panel service-panel--intel" data-index="2">
+              <!-- PLACEHOLDER IMG: Cerebro computarizado renderizado en 3D integrado en línea de producción -->
+              <div class="service-panel__bg bg-b-3" role="img" aria-label="Placeholder: Cerebro computarizado renderizado en 3D integrado en una línea de producción industrial con sensores IoT"></div>
+              <div class="service-panel__overlay service-panel__overlay--deep"></div>
+              <div class="service-panel__content">
+                <span class="service-panel__index mono">03</span>
+                <div class="intel-card-glow">
+                  <div class="service-icon icon-glow-cyan"><i data-lucide="database"></i></div>
+                  <h3>Ingeniería de Datos & Arquitectura Corporativa</h3>
+                  <p>Bodegas de datos (Data Warehouses) seguras y estructuradas. Tu información centralizada, lista para escalar e integrarse a cualquier CRM.</p>
+                  <ul class="service-features mono">
+                    <li><i data-lucide="check"></i> SQL / BigQuery</li>
+                    <li><i data-lucide="check"></i> APIs Integradas</li>
+                  </ul>
+                  <a href="#contacto" class="btn btn-liquid btn-magnetic">Agendar diagnóstico <i data-lucide="arrow-right"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICIOS -->
-    <section id="servicios" class="section services">
+    <!-- SECTION 2: AGENDAR DIAGNÓSTICO 1:1 -->
+    <section id="contacto" class="contact section-padding">
       <div class="container">
-        <header class="section-header">
-          <p class="eyebrow mono">Servicios especializados B2B</p>
-          <h2>¿Listo para dar el siguiente paso hacia la productividad?</h2>
-          <p class="section-desc">Analizamos tu operación sin costo ni compromiso. Identificamos oportunidades de mayor impacto y te presentamos un plan concreto en menos de 48 horas.</p>
-        </header>
-
-        <div class="b2b-grid">
-          <article class="b2b-card" data-reveal>
-            <span class="b2b-num mono">01</span>
-            <div class="b2b-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none"><path d="M8 36V16l8-6 8 6v20M24 36V10l8 6v20M40 36V22l-8-6" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div class="contact-grid glass-panel gs-reveal-up">
+          <div class="contact-info">
+            <h2>Agenda tu diagnóstico <span class="text-gradient">1:1 sin costo</span></h2>
+            <p>Cuéntanos qué proceso manual te está costando más tiempo. Te respondemos con un plan concreto en menos de 24 horas.</p>
+            
+            <div class="contact-methods">
+              <a href="mailto:generacionxperience@gmail.com" class="contact-method">
+                <i data-lucide="mail"></i>
+                <div>
+                  <span class="mono">CORREO</span>
+                  <p>generacionxperience@gmail.com</p>
+                </div>
+              </a>
+              <a href="https://wa.me/573022482933?text=Hola%20Xperience%20Tech%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20sin%20costo." class="contact-method" target="_blank" rel="noopener noreferrer">
+                <i data-lucide="phone"></i>
+                <div>
+                  <span class="mono">WHATSAPP DIRECTO</span>
+                  <p>+57 302 248 2933</p>
+                </div>
+              </a>
             </div>
-            <h3>Business Intelligence</h3>
-            <p>Automatización e integración inteligente de datos. Consultoría, flujos controlados y reportes gerenciales para decisiones que no dependen de Excel desactualizado.</p>
-          </article>
-          <article class="b2b-card" data-reveal>
-            <span class="b2b-num mono">02</span>
-            <div class="b2b-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="1.5"/><path d="M24 14v10l7 4" stroke="currentColor" stroke-width="1.5"/></svg>
-            </div>
-            <h3>Data Analyst</h3>
-            <p>Decisiones basadas en consultas integradas y control de mejoras. Visualizaciones claras, cruces de información automatizados y métricas que tu gerencia puede confiar.</p>
-          </article>
-          <article class="b2b-card" data-reveal>
-            <span class="b2b-num mono">03</span>
-            <div class="b2b-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M6 18h36M14 26h12" stroke="currentColor" stroke-width="1.5"/></svg>
-            </div>
-            <h3>Desarrollo Web a Medida</h3>
-            <p>Landing pages, portales internos, CRMs y ERPs integrados. Componentes personalizados y arquitecturas escalables que crecen con tu operación.</p>
-          </article>
-        </div>
-
-        <div class="benefits-strip" data-reveal>
-          <div class="benefit-item">
-            <span class="benefit-icon">⚡</span>
-            <p><strong>+40%</strong> de velocidad en el acceso a métricas clave</p>
           </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">⟳</span>
-            <p><strong>100%</strong> automatización en cruces de información y reportes</p>
-          </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">&lt;/&gt;</span>
-            <p>Desarrollo web a medida: CRMs, cotizadores y dashboards integrados</p>
+          
+          <div class="contact-form-container">
+            <form id="contactForm" class="contact-form">
+              <div class="form-group">
+                <label for="name" class="mono">Nombre / Empresa</label>
+                <input type="text" id="name" required placeholder="Ingresa tu nombre o empresa">
+              </div>
+              <div class="form-group">
+                <label for="email" class="mono">Correo Electrónico</label>
+                <input type="email" id="email" required placeholder="correo@tuempresa.com">
+              </div>
+              <div class="form-group">
+                <label for="process" class="mono">¿Qué necesitas resolver?</label>
+                <textarea id="process" rows="4" required placeholder="Ej: Necesitamos un portal para clientes o automatizar Excels..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-glow btn-full">Solicitar Diagnóstico</button>
+            </form>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROCESO -->
-    <section id="proceso" class="section process">
-      <div class="container process-grid">
-        <div class="process-content">
-          <header class="section-header section-header--left">
-            <p class="eyebrow mono">Cómo trabajamos</p>
-            <h2>Transformamos el caos de tus datos en claridad operativa</h2>
-            <p class="section-desc">Sin promesas vacías. Flujos reales, entregables concretos y acompañamiento técnico desde el primer día.</p>
-          </header>
-          <ol class="process-steps">
-            <li data-reveal>
-              <span class="step-num mono">1</span>
-              <div>
-                <h4>Diagnóstico sin costo</h4>
-                <p>Mapeamos tus archivos, procesos manuales y cuellos de botella. Entendemos cómo trabaja tu equipo hoy.</p>
-              </div>
-            </li>
-            <li data-reveal>
-              <span class="step-num mono">2</span>
-              <div>
-                <h4>Diseño del flujo</h4>
-                <p>Definimos qué automatizar primero, qué tablero construir y qué integraciones necesitas — priorizando impacto real.</p>
-              </div>
-            </li>
-            <li data-reveal>
-              <span class="step-num mono">3</span>
-              <div>
-                <h4>Implementación ágil</h4>
-                <p>Desde un piloto en días hasta ecosistemas completos en semanas. Hosting, monitoreo y soporte incluidos.</p>
-              </div>
-            </li>
-            <li data-reveal>
-              <span class="step-num mono">4</span>
-              <div>
-                <h4>Evolución continua</h4>
-                <p>Capacitamos a tu equipo, medimos ROI y ajustamos. Tu operación mejora mes a mes, no solo el día del lanzamiento.</p>
-              </div>
-            </li>
-          </ol>
+    <!-- SECTION 3: IMPACT COMPARISON -->
+    <section id="transformacion" class="impact section-padding">
+      <div class="container">
+        <div class="section-header text-center gs-reveal-up">
+          <span class="eyebrow mono">Impacto Real</span>
+          <h2>De la fricción al <span class="text-gradient">Flujo Continuo</span></h2>
+          <p class="section-desc">Observa cómo cambia tu operación cuando implementamos el ecosistema Xperience.</p>
         </div>
 
-        <div class="process-visual" data-reveal>
-          <div class="dashboard-live">
-            <div class="dashboard-header">
-              <span class="mono dashboard-title">PANEL GERENCIAL · LIVE</span>
-              <span class="dashboard-live-badge mono"><span class="pulse-dot"></span> EN VIVO</span>
+        <div class="comparison-container gs-reveal-up">
+          <div class="tabs comparison-tabs">
+            <button class="tab-btn active" data-target="before">Operación Tradicional en Excel</button>
+            <button class="tab-btn" data-target="after">Ecosistema Xperience</button>
+          </div>
+
+          <div class="comparison-panels">
+            <div class="panel before-panel active" id="before">
+              <div class="panel-content">
+                <div class="panel-text">
+                  <h3>Caos de datos y horas perdidas</h3>
+                  <ul class="impact-list">
+                    <li><i data-lucide="x-circle" class="text-red"></i> Reportes manuales cada fin de mes</li>
+                    <li><i data-lucide="x-circle" class="text-red"></i> 3 versiones diferentes de la misma métrica</li>
+                    <li><i data-lucide="x-circle" class="text-red"></i> Decisiones reactivas basadas en intuición</li>
+                  </ul>
+                </div>
+                <div class="panel-stats">
+                  <div class="stat-box bad">
+                    <span class="stat-num mono">20+</span>
+                    <span class="stat-text">Horas/sem perdidas</span>
+                  </div>
+                  <div class="stat-box bad">
+                    <span class="stat-num mono">15%</span>
+                    <span class="stat-text">Margen de error manual</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="dashboard-grid">
-              <div class="dash-kpi">
-                <span class="dash-kpi-label mono">REPORTES AUTO</span>
-                <span class="dash-kpi-value" data-counter="100">0</span>
-                <span class="dash-kpi-delta mono">%</span>
-              </div>
-              <div class="dash-kpi">
-                <span class="dash-kpi-label mono">HORAS RECUPERADAS</span>
-                <span class="dash-kpi-value" data-counter="32">0</span>
-                <span class="dash-kpi-delta mono">/ semana</span>
-              </div>
-              <div class="dash-kpi">
-                <span class="dash-kpi-label mono">FUENTES UNIFICADAS</span>
-                <span class="dash-kpi-value" data-counter="6">0</span>
-                <span class="dash-kpi-delta mono">integradas</span>
-              </div>
-            </div>
-            <div class="dashboard-charts">
-              <div class="dash-chart dash-chart--line">
-                <p class="mono dash-chart-title">THROUGHPUT OPERATIVO</p>
-                <svg class="chart-svg" viewBox="0 0 320 100" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(0,180,216,0.3)" />
-                      <stop offset="100%" stop-color="rgba(0,180,216,0)" />
-                    </linearGradient>
-                  </defs>
-                  <path class="chart-area" d="M0,80 L40,70 L80,55 L120,60 L160,40 L200,35 L240,25 L280,30 L320,15 L320,100 L0,100 Z" fill="url(#lineGrad)" />
-                  <path class="chart-line" d="M0,80 L40,70 L80,55 L120,60 L160,40 L200,35 L240,25 L280,30 L320,15" fill="none" stroke="var(--accent-cyan)" stroke-width="2" />
-                </svg>
-              </div>
-              <div class="dash-chart dash-chart--bars">
-                <p class="mono dash-chart-title">ETAPAS DEL FLUJO</p>
-                <div class="bar-chart">
-                  <div class="bar-col"><span class="bar-fill-css" style="--h: 65%"></span><span class="mono">CAP</span></div>
-                  <div class="bar-col"><span class="bar-fill-css" style="--h: 78%"></span><span class="mono">PROC</span></div>
-                  <div class="bar-col"><span class="bar-fill-css" style="--h: 92%"></span><span class="mono">AUTO</span></div>
-                  <div class="bar-col"><span class="bar-fill-css" style="--h: 88%"></span><span class="mono">DASH</span></div>
+
+            <div class="panel after-panel" id="after">
+              <div class="panel-content">
+                <div class="panel-text">
+                  <h3>Sincronización total y decisiones rápidas</h3>
+                  <ul class="impact-list">
+                    <li><i data-lucide="check-circle" class="text-green"></i> Métricas en vivo accesibles 24/7</li>
+                    <li><i data-lucide="check-circle" class="text-green"></i> Única fuente de verdad automatizada</li>
+                    <li><i data-lucide="check-circle" class="text-green"></i> Decisiones proactivas basadas en datos</li>
+                  </ul>
+                </div>
+                <div class="panel-stats">
+                  <div class="stat-box good">
+                    <span class="stat-num mono">0</span>
+                    <span class="stat-text">Horas en copy-paste</span>
+                  </div>
+                  <div class="stat-box good">
+                    <span class="stat-num mono">100%</span>
+                    <span class="stat-text">Trazabilidad</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -267,232 +444,126 @@
       </div>
     </section>
 
-    <!-- PLANES -->
-    <section id="planes" class="section pricing">
+    <!-- SECTION 5: PRICING & TIERS -->
+    <section id="planes" class="pricing section-padding">
       <div class="container">
-        <header class="section-header">
-          <p class="eyebrow mono">Modelos de implementación</p>
-          <h2>Empieza pequeño, escala cuando lo necesites</h2>
-          <p class="section-desc">Sin contratos eternos. Cancela cuando quieras en el plan piloto. Crecemos contigo.</p>
-        </header>
+        <div class="section-header text-center gs-reveal-up">
+          <span class="eyebrow mono">Inversión Transparente</span>
+          <h2>Modelos escalables para tu <span class="text-gradient">crecimiento</span></h2>
+          <p class="section-desc">Invierte en tecnología hoy, recupera el tiempo de tu equipo mañana.</p>
+        </div>
 
         <div class="pricing-grid">
-          <article class="pricing-card" data-reveal>
-            <header class="pricing-card-header">
+          <!-- Piloto -->
+          <div class="pricing-card glass-panel gs-reveal-up">
+            <div class="pricing-header">
               <h3>Piloto</h3>
-              <p class="pricing-subtitle">Automatiza un proceso específico</p>
-            </header>
-            <div class="pricing-amounts">
-              <div class="pricing-row">
-                <span class="pricing-label mono">SETUP</span>
-                <span class="pricing-value">Desde <strong>$2M</strong></span>
+              <p>Automatiza un proceso específico y prueba el impacto.</p>
+            </div>
+            <div class="pricing-price">
+              <div class="price-setup">
+                <span class="mono">Setup desde</span>
+                <h4>$2M <span class="currency">COP</span></h4>
               </div>
-              <div class="pricing-row">
-                <span class="pricing-label mono">SAAS</span>
-                <span class="pricing-value pricing-value--accent">Desde <strong>$290k</strong> / mes</span>
+              <div class="price-monthly">
+                <span class="mono">+ SaaS mensual</span>
+                <h5>$290k <span class="currency">COP/mes</span></h5>
               </div>
             </div>
-            <hr class="pricing-divider" />
             <ul class="pricing-features">
-              <li>1 automatización (bot, cotizador o dashboard)</li>
-              <li>Entrega en 5–10 días</li>
-              <li>Hosting y monitoreo incluidos</li>
-              <li>Soporte vía WhatsApp</li>
-              <li>Cancelas cuando quieras</li>
+              <li><i data-lucide="check"></i> 1 Automatización/Dashboard</li>
+              <li><i data-lucide="check"></i> Entrega en 5–10 días</li>
+              <li><i data-lucide="check"></i> Hosting y monitoreo</li>
+              <li><i data-lucide="check"></i> Soporte WhatsApp</li>
             </ul>
-            <a href="#contacto" class="btn btn-outline pricing-cta" data-plan="Piloto">Empezar con un piloto</a>
-          </article>
+            <a href="#" class="btn btn-outline btn-full wa-link" data-plan="Piloto">Empezar Piloto</a>
+          </div>
 
-          <article class="pricing-card pricing-card--featured" data-reveal>
-            <span class="pricing-badge">MÁS POPULAR</span>
-            <header class="pricing-card-header">
+          <!-- Crecimiento -->
+          <div class="pricing-card glass-panel featured gs-reveal-up">
+            <div class="popular-badge">MÁS POPULAR</div>
+            <div class="pricing-header">
               <h3>Crecimiento</h3>
-              <p class="pricing-subtitle">Para empresas que ya quieren escalar</p>
-            </header>
-            <div class="pricing-amounts">
-              <div class="pricing-row">
-                <span class="pricing-label mono">SETUP</span>
-                <span class="pricing-value">Desde <strong>$5M</strong></span>
+              <p>Para empresas listas para escalar su ecosistema digital.</p>
+            </div>
+            <div class="pricing-price">
+              <div class="price-setup">
+                <span class="mono">Setup desde</span>
+                <h4>$5M <span class="currency">COP</span></h4>
               </div>
-              <div class="pricing-row">
-                <span class="pricing-label mono">SAAS</span>
-                <span class="pricing-value pricing-value--orange">Desde <strong>$690k</strong> / mes</span>
+              <div class="price-monthly">
+                <span class="mono">+ SaaS mensual</span>
+                <h5>$690k <span class="currency">COP/mes</span></h5>
               </div>
             </div>
-            <hr class="pricing-divider" />
-            <ul class="pricing-features pricing-features--orange">
-              <li>Hasta 3 automatizaciones integradas</li>
-              <li>Bot WhatsApp + Cotizador + CRM + Dashboard</li>
-              <li>Entrega en 2–4 semanas</li>
-              <li>Capacitación a tu equipo</li>
-              <li>Soporte prioritario 24/7</li>
-              <li>Reportes mensuales de ROI</li>
-            </ul>
-            <a href="#contacto" class="btn btn-orange pricing-cta" data-plan="Crecimiento">Hablar de crecimiento</a>
-          </article>
-
-          <article class="pricing-card" data-reveal>
-            <header class="pricing-card-header">
-              <h3>Enterprise</h3>
-              <p class="pricing-subtitle">Operaciones grandes y críticas</p>
-            </header>
-            <div class="pricing-amounts">
-              <div class="pricing-row">
-                <span class="pricing-label mono">SETUP</span>
-                <span class="pricing-value pricing-value--accent"><strong>A medida</strong></span>
-              </div>
-              <div class="pricing-row">
-                <span class="pricing-label mono">SAAS</span>
-                <span class="pricing-value pricing-value--accent"><strong>A medida</strong></span>
-              </div>
-            </div>
-            <hr class="pricing-divider" />
             <ul class="pricing-features">
-              <li>Automatizaciones ilimitadas</li>
-              <li>Integraciones con ERP / SAP / Odoo</li>
-              <li>SLA 99.9% y servidor dedicado</li>
-              <li>Account manager dedicado</li>
-              <li>Roadmap compartido trimestral</li>
-              <li>Facturación empresarial</li>
+              <li><i data-lucide="check"></i> Hasta 3 Automatizaciones</li>
+              <li><i data-lucide="check"></i> Portal Web + Dashboard integrado</li>
+              <li><i data-lucide="check"></i> Entrega en 2–4 semanas</li>
+              <li><i data-lucide="check"></i> Soporte prioritario 24/7</li>
             </ul>
-            <a href="#contacto" class="btn btn-outline pricing-cta" data-plan="Enterprise">Agendar reunión</a>
-          </article>
-        </div>
-      </div>
-    </section>
+            <a href="#" class="btn btn-primary btn-glow btn-full wa-link" data-plan="Crecimiento">Hablar de Crecimiento</a>
+          </div>
 
-    <!-- INDUSTRIAL (compacto) -->
-    <section id="industrial" class="section industrial-compact">
-      <div class="container">
-        <details class="industrial-details">
-          <summary class="industrial-summary">
-            <span class="eyebrow mono">Operaciones industriales</span>
-            <h2>¿Necesitas integración periférica, IoT o control de planta?</h2>
-            <span class="industrial-toggle mono">Ver soluciones industriales +</span>
-          </summary>
-          <div class="industrial-body">
-            <p class="section-desc">Para empresas con operaciones en planta, sensores o sistemas críticos. Arquitectura modular con CRM, automatización de datos y analítica en tiempo real.</p>
-            <div class="industrial-grid">
-              <div class="industrial-card">
-                <h4>Suite operativa</h4>
-                <p>CRM propietario, motores de automatización y dashboards gerenciales sin desfases.</p>
+          <!-- Enterprise -->
+          <div class="pricing-card glass-panel gs-reveal-up">
+            <div class="pricing-header">
+              <h3>Enterprise</h3>
+              <p>Operaciones grandes, críticas y a medida.</p>
+            </div>
+            <div class="pricing-price">
+              <div class="price-setup">
+                <span class="mono">Setup</span>
+                <h4>A medida</h4>
               </div>
-              <div class="industrial-card">
-                <h4>Integración IoT</h4>
-                <p>Conexión de sensores, periféricos y backends industriales con trazabilidad end-to-end.</p>
-              </div>
-              <div class="industrial-card">
-                <h4>Soporte 24/7</h4>
-                <p>Monitoreo continuo, infraestructura estable y mantenimiento evolutivo sin parar producción.</p>
+              <div class="price-monthly">
+                <span class="mono">SaaS mensual</span>
+                <h5>A medida</h5>
               </div>
             </div>
-            <div class="tabs" role="tablist" aria-label="Comparativa operativa">
-              <button class="tab-btn" role="tab" id="tab-manual" aria-selected="true" aria-controls="panel-manual" data-tab="manual">Proceso manual</button>
-              <button class="tab-btn" role="tab" id="tab-xperience" aria-selected="false" aria-controls="panel-xperience" data-tab="xperience">Con Xperience</button>
-            </div>
-            <div class="tab-panels">
-              <div class="tab-panel is-active" id="panel-manual" role="tabpanel" aria-labelledby="tab-manual">
-                <div class="compare-col compare-col--bad">
-                  <ul>
-                    <li>Datos en hojas de cálculo y mensajes dispersos</li>
-                    <li>Reportes manuales con desfase de días</li>
-                    <li>Sin visibilidad de cuellos de botella</li>
-                  </ul>
-                  <div class="efficiency-bar">
-                    <span class="efficiency-label">Eficiencia estimada</span>
-                    <div class="bar-track"><div class="bar-fill bar-fill--low" data-efficiency="38"></div></div>
-                    <span class="efficiency-value mono">38%</span>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-panel" id="panel-xperience" role="tabpanel" aria-labelledby="tab-xperience" hidden>
-                <div class="compare-col compare-col--good">
-                  <ul>
-                    <li>Tracking de folios con WhatsApp 24/7 integrado</li>
-                    <li>Procesamiento automatizado sin intervención manual</li>
-                    <li>Dashboards gerenciales en tiempo real</li>
-                  </ul>
-                  <div class="efficiency-bar">
-                    <span class="efficiency-label">Eficiencia estimada</span>
-                    <div class="bar-track"><div class="bar-fill bar-fill--high" data-efficiency="94"></div></div>
-                    <span class="efficiency-value mono">94%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ul class="pricing-features">
+              <li><i data-lucide="check"></i> Software / ERP Completo</li>
+              <li><i data-lucide="check"></i> Integración ERP/SAP/Odoo</li>
+              <li><i data-lucide="check"></i> SLA 99.9% + Servidor Dedicado</li>
+              <li><i data-lucide="check"></i> Account Manager</li>
+            </ul>
+            <a href="#" class="btn btn-outline btn-full wa-link" data-plan="Enterprise">Agendar Reunión</a>
           </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contacto" class="section contact">
-      <div class="container contact-grid">
-        <div class="contact-info">
-          <header class="section-header section-header--left">
-            <p class="eyebrow mono">Contacto</p>
-            <h2>Unifica la verdad de tu empresa hoy</h2>
-            <p class="section-desc">Cuéntanos qué proceso manual te está costando más tiempo. Te respondemos con un plan concreto — sin rodeos ni jerga innecesaria.</p>
-          </header>
-          <address class="contact-details">
-            <p>
-              <span class="contact-label mono">Correo</span>
-              <a href="mailto:generacionxperience@gmail.com">generacionxperience@gmail.com</a>
-            </p>
-            <p>
-              <span class="contact-label mono">Teléfono</span>
-              <a href="tel:+573022482933">+57 302 248 2933</a>
-            </p>
-          </address>
-          <a href="https://wa.me/573022482933?text=Hola%20Xperience%20Tech%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20sin%20costo." class="btn btn-glow contact-wa" target="_blank" rel="noopener noreferrer">Escríbenos al WhatsApp</a>
         </div>
-        <form class="contact-form" id="contact-form" novalidate>
-          <div class="form-row">
-            <label for="nombre">Nombre / Empresa</label>
-            <input type="text" id="nombre" name="nombre" required autocomplete="organization" placeholder="Tu empresa" />
-          </div>
-          <div class="form-row">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" required autocomplete="email" placeholder="correo@empresa.com" />
-          </div>
-          <div class="form-row">
-            <label for="telefono">Teléfono</label>
-            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+57 ..." />
-          </div>
-          <div class="form-row">
-            <label for="mensaje">¿Qué proceso manual quieres eliminar?</label>
-            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Ej: consolidar reportes de ventas desde 3 Excels cada lunes..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-glow btn-full">Agenda tu diagnóstico sin costo</button>
-          <p class="form-status mono" id="form-status" role="status" aria-live="polite"></p>
-        </form>
       </div>
     </section>
   </main>
 
+  <!-- SECTION 6: FOOTER -->
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <a href="#home" class="logo logo--full logo--footer">
-        <div class="logo-box">
-  <span class="logo-mark-x"></span>
-  <span class="logo-rest">perience</span>
-</div>
-      </a>
-      <p class="footer-copy">© <span id="year"></span> Xperience Tech & Analytics — Inteligencia Digital. Automatización, datos y desarrollo web.</p>
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-x">X</span>
+          <span class="logo-text">perience</span>
+        </a>
+        <p>Software a medida, automatización y datos para operaciones que exigen velocidad.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#desarrollo">Desarrollo a Medida</a>
+        <a href="#contacto">Agendar Diagnóstico</a>
+        <a href="#data">Data & Automatizaciones</a>
+        <a href="#planes">Planes</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p class="mono">&copy; <span id="year"></span> Xperience Tech & Analytics. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <a
-    href="https://wa.me/573022482933?text=Hola%20Xperience%20Tech%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20sin%20costo."
-    class="whatsapp-float"
-    id="whatsapp-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Contactar por WhatsApp"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/573022482933?text=Hola%20Xperience%20Tech%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20sin%20costo." class="wa-float btn-magnetic" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
   </a>
 
-  <script src="app.js" defer></script>
+  <!-- Scripts -->
+  <script src="app.js"></script>
 </body>
 </html>

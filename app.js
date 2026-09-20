@@ -1,437 +1,478 @@
 /**
- * Xperience Tech & Analytics — Landing
- * Vanilla ES6+ | Light-first · Sin dependencias
+ * Xperience Tech & Analytics - Main Application Logic
+ * Includes Three.js Background, GSAP Animations, UI Interactions, and 3D Carousel
  */
 
-(function () {
-  "use strict";
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Initialize Icons
+  lucide.createIcons();
 
-  const STORAGE_THEME = "xperience-theme";
-  const CONTACT_EMAIL = "generacionxperience@gmail.com";
+  // 2. Set Current Year in Footer
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  const SELECTORS = {
-    header: "#site-header",
-    navToggle: "#nav-toggle",
-    navMenu: "#nav-menu",
-    navLinks: ".nav-link",
-    sections: "section[id]",
-    tabs: "[data-tab]",
-    tabPanels: ".tab-panel",
-    contactForm: "#contact-form",
-    formStatus: "#form-status",
-    whatsapp: "#whatsapp-float",
-    year: "#year",
-    reveal: "[data-reveal]",
-    barFills: ".bar-fill",
-    themeToggle: "#theme-toggle",
-    themeLabel: "#theme-label",
-    mensaje: "#mensaje",
-    counters: "[data-counter]",
-    quoteTrack: "#quote-track",
-  };
+  // 3. Theme Toggle Logic
+  initThemeToggle();
 
-  const dom = {
-    header: document.querySelector(SELECTORS.header),
-    navToggle: document.querySelector(SELECTORS.navToggle),
-    navMenu: document.querySelector(SELECTORS.navMenu),
-    navLinks: document.querySelectorAll(SELECTORS.navLinks),
-    sections: document.querySelectorAll(SELECTORS.sections),
-    contactForm: document.querySelector(SELECTORS.contactForm),
-    formStatus: document.querySelector(SELECTORS.formStatus),
-    whatsapp: document.querySelector(SELECTORS.whatsapp),
-    year: document.querySelector(SELECTORS.year),
-    themeToggle: document.querySelector(SELECTORS.themeToggle),
-    themeLabel: document.querySelector(SELECTORS.themeLabel),
-    mensaje: document.querySelector(SELECTORS.mensaje),
-    quoteTrack: document.querySelector(SELECTORS.quoteTrack),
-  };
+  // 4. Mobile Navigation & ScrollSpy
+  initMobileNav();
 
-  function init() {
-    if (dom.year) dom.year.textContent = String(new Date().getFullYear());
-    initTheme();
-    initQuoteTicker();
-    initSmoothScroll();
-    initMobileNav();
-    initHeaderScroll();
-    initActiveNav();
-    initTabs();
-    initReveal();
-    initContactForm();
-    initWhatsAppFloat();
-    initPricingCTA();
-    animateBarsOnVisible();
-    initCounters();
-  }
+  // 5. Tabs Logic (Before/After)
+  initTabs();
 
-  /* ---------- Theme (light default) ---------- */
-  function getStoredTheme() {
-    try {
-      const t = localStorage.getItem(STORAGE_THEME);
-      if (t === "light" || t === "dark") return t;
-    } catch (e) {
-      /* ignore */
-    }
-    return "light";
-  }
+  // 6. GSAP Animations & Carousel
+  initGSAP();
+  initCarousel();
 
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    if (dom.themeLabel) {
-      dom.themeLabel.textContent = theme === "light" ? "CLARO" : "OSCURO";
-    }
-    if (dom.themeToggle) {
-      dom.themeToggle.setAttribute(
-        "aria-label",
-        theme === "light" ? "Activar modo oscuro" : "Activar modo claro"
-      );
-    }
-  }
+  // 7. Three.js Scene
+  initThreeJS();
 
-  function initTheme() {
-    applyTheme(getStoredTheme());
-    if (!dom.themeToggle) return;
+  // 8. Form Handling
+  initForm();
+});
 
-    dom.themeToggle.addEventListener("click", () => {
-      const current =
-        document.documentElement.getAttribute("data-theme") || "light";
-      const next = current === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try {
-        localStorage.setItem(STORAGE_THEME, next);
-      } catch (e) {
-        /* ignore */
-      }
-    });
-  }
+/* ==========================================================================
+   THEME TOGGLE
+   ========================================================================== */
+function initThemeToggle() {
+  const toggleBtn = document.getElementById('theme-toggle');
+  const root = document.documentElement;
 
-  /* ---------- Quote ticker (duplicate for seamless loop) ---------- */
-  function initQuoteTicker() {
-    if (!dom.quoteTrack) return;
-    const items = dom.quoteTrack.innerHTML;
-    dom.quoteTrack.innerHTML = items + items;
-  }
-
-  /* ---------- Navigation ---------- */
-  function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", (e) => {
-        const id = anchor.getAttribute("href");
-        if (!id || id === "#") return;
-        const target = document.querySelector(id);
-        if (!target) return;
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-        closeMobileNav();
-      });
-    });
-  }
-
-  function initMobileNav() {
-    if (!dom.navToggle || !dom.navMenu) return;
-
-    dom.navToggle.addEventListener("click", () => {
-      const isOpen = dom.navMenu.classList.toggle("is-open");
-      dom.navToggle.classList.toggle("is-open", isOpen);
-      dom.navToggle.setAttribute("aria-expanded", String(isOpen));
-      dom.navToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Cerrar menú" : "Abrir menú"
-      );
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMobileNav();
-    });
-  }
-
-  function closeMobileNav() {
-    if (!dom.navMenu || !dom.navToggle) return;
-    dom.navMenu.classList.remove("is-open");
-    dom.navToggle.classList.remove("is-open");
-    dom.navToggle.setAttribute("aria-expanded", "false");
-    dom.navToggle.setAttribute("aria-label", "Abrir menú");
-  }
-
-  function initHeaderScroll() {
-    if (!dom.header) return;
-    const onScroll = () => {
-      dom.header.classList.toggle("is-scrolled", window.scrollY > 20);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-
-  function initActiveNav() {
-    if (!dom.sections.length || !dom.navLinks.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const id = entry.target.getAttribute("id");
-          dom.navLinks.forEach((link) => {
-            link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
-          });
-        });
-      },
-      { rootMargin: "-42% 0px -50% 0px", threshold: 0 }
-    );
-
-    dom.sections.forEach((section) => observer.observe(section));
-  }
-
-  /* ---------- Tabs ---------- */
-  function initTabs() {
-    const tabButtons = document.querySelectorAll(SELECTORS.tabs);
-    if (!tabButtons.length) return;
-
-    tabButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        setActiveTab(btn.getAttribute("data-tab"));
-      });
-    });
-
-    setActiveTab("manual");
-  }
-
-  function setActiveTab(tabId) {
-    const tabButtons = document.querySelectorAll(SELECTORS.tabs);
-    const panels = document.querySelectorAll(SELECTORS.tabPanels);
-
-    tabButtons.forEach((btn) => {
-      btn.setAttribute(
-        "aria-selected",
-        String(btn.getAttribute("data-tab") === tabId)
-      );
-    });
-
-    panels.forEach((panel) => {
-      const show =
-        (tabId === "manual" && panel.id === "panel-manual") ||
-        (tabId === "xperience" && panel.id === "panel-xperience");
-
-      panel.classList.toggle("is-active", show);
-      panel.hidden = !show;
-
-      if (show) {
-        requestAnimationFrame(() => {
-          panel.querySelectorAll(SELECTORS.barFills).forEach((bar) => {
-            const value = bar.getAttribute("data-efficiency");
-            if (value) bar.style.width = `${value}%`;
-          });
-        });
-      }
-    });
-  }
-
-  function animateBarsOnVisible() {
-    const bars = document.querySelectorAll(SELECTORS.barFills);
-    if (!bars.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const bar = entry.target;
-          const panel = bar.closest(".tab-panel");
-          if (panel && panel.hidden) return;
-          const value = bar.getAttribute("data-efficiency");
-          if (value) bar.style.width = `${value}%`;
-          obs.unobserve(bar);
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    bars.forEach((bar) => observer.observe(bar));
-  }
-
-  /* ---------- Counters ---------- */
-  function initCounters() {
-    const nodes = document.querySelectorAll(SELECTORS.counters);
-    if (!nodes.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          animateCounter(entry.target);
-          obs.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.35 }
-    );
-
-    nodes.forEach((node) => observer.observe(node));
-  }
-
-  function animateCounter(el) {
-    const raw = el.getAttribute("data-counter");
-    if (raw == null) return;
-
-    const text = el.textContent.trim();
-    if (text.includes("h") || text.includes("/")) return;
-
-    const isNegative = String(raw).startsWith("-");
-    const target = Math.abs(parseInt(raw, 10));
-    if (Number.isNaN(target)) return;
-
-    const suffix = el.getAttribute("data-suffix") || (text.includes("%") ? "%" : "");
-    const prefix = isNegative ? "-" : "";
-    const duration = 1200;
-    const start = performance.now();
-
-    function frame(now) {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      const current = Math.round(target * eased);
-      el.textContent = suffix
-        ? `${prefix}${current}${suffix}`
-        : String(isNegative ? -current : current);
-
-      if (t < 1) requestAnimationFrame(frame);
-      else {
-        el.textContent = suffix
-          ? `${prefix}${target}${suffix}`
-          : String(isNegative ? -target : target);
-      }
-    }
-
-    requestAnimationFrame(frame);
-  }
-
-  /* ---------- Reveal on scroll ---------- */
-  function initReveal() {
-    const items = document.querySelectorAll(SELECTORS.reveal);
-    if (!items.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          obs.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
-    );
-
-    items.forEach((el) => observer.observe(el));
-  }
-
-  /* ---------- Pricing CTA ---------- */
-  function initPricingCTA() {
-    document.querySelectorAll(".pricing-cta").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const plan = btn.getAttribute("data-plan");
-        if (!plan) return;
-
-        if (btn.classList.contains("btn-orange")) {
-          e.preventDefault();
-          const msg = encodeURIComponent(
-            `Hola Xperience Tech, me interesa el plan ${plan}. Quiero hablar sobre escalamiento y cotización.`
-          );
-          window.open(
-            `https://wa.me/573022482933?text=${msg}`,
-            "_blank",
-            "noopener,noreferrer"
-          );
-          closeMobileNav();
-          return;
-        }
-
-        if (dom.mensaje) {
-          dom.mensaje.value = `Plan de interés: ${plan}\n\n`;
-          dom.mensaje.focus();
-        }
-        closeMobileNav();
-      });
-    });
-  }
-
-  /* ---------- Contact form ---------- */
-  function initContactForm() {
-    if (!dom.contactForm || !dom.formStatus) return;
-
-    dom.contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(dom.contactForm);
-      const nombre = String(formData.get("nombre") || "").trim();
-      const email = String(formData.get("email") || "").trim();
-      const telefono = String(formData.get("telefono") || "").trim();
-      const mensaje = String(formData.get("mensaje") || "").trim();
-
-      if (!nombre || !email || !mensaje) {
-        setFormStatus("Completa los campos obligatorios.", "error");
-        return;
-      }
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setFormStatus("Correo electrónico no válido.", "error");
-        return;
-      }
-
-      const subject = encodeURIComponent(
-        `[Xperience Tech] Diagnóstico — ${nombre}`
-      );
-      const body = encodeURIComponent(
-        `Empresa / Contacto: ${nombre}\n` +
-          `Correo: ${email}\n` +
-          `Teléfono: ${telefono || "No indicado"}\n\n` +
-          `Mensaje:\n${mensaje}\n\n` +
-          `— Enviado desde landing Xperience Tech & Analytics`
-      );
-
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-      setFormStatus(
-        "Se abrió tu cliente de correo. Si no aparece, escríbenos por WhatsApp.",
-        "ok"
-      );
-      dom.contactForm.reset();
-    });
-  }
-
-  function setFormStatus(msg, type) {
-    if (!dom.formStatus) return;
-    dom.formStatus.textContent = msg;
-    dom.formStatus.style.color =
-      type === "error" ? "#ef4444" : "var(--accent-cyan)";
-  }
-
-  /* ---------- WhatsApp float ---------- */
-  function initWhatsAppFloat() {
-    const el = dom.whatsapp;
-    if (!el) return;
-
-    let ticking = false;
-    const amplitude = 10;
-
-    const updatePosition = () => {
-      const scrollY = window.scrollY;
-      const offset = Math.sin(scrollY * 0.007) * amplitude;
-      const scale = 1 + Math.min(scrollY * 0.00004, 0.05);
-      el.style.transform = `translateY(${-offset}px) scale(${scale})`;
-      ticking = false;
-    };
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(updatePosition);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
-
-    updatePosition();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+  const savedTheme = localStorage.getItem('xperience-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (savedTheme) {
+    root.setAttribute('data-theme', savedTheme);
+  } else if (prefersDark) {
+    root.setAttribute('data-theme', 'dark');
   } else {
-    init();
+    root.setAttribute('data-theme', 'light');
   }
-})();
+
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = root.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', newTheme);
+    localStorage.setItem('xperience-theme', newTheme);
+  });
+}
+
+/* ==========================================================================
+   MOBILE NAVIGATION & SCROLLSPY
+   ========================================================================== */
+function initMobileNav() {
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  const header = document.getElementById('site-header');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  navToggle.addEventListener('click', () => {
+    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', !isExpanded);
+    navMenu.classList.toggle('is-active');
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navMenu.classList.remove('is-active');
+    });
+  });
+
+  // Header scroll effect and ScrollSpy
+  const sections = document.querySelectorAll('section');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   TABS LOGIC (BEFORE / AFTER)
+   ========================================================================== */
+function initTabs() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetId = btn.getAttribute('data-target');
+      document.getElementById(targetId).classList.add('active');
+    });
+  });
+}
+
+/* ==========================================================================
+   GSAP ANIMATIONS & CAROUSEL
+   ========================================================================== */
+function initGSAP() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero Reveals
+  gsap.fromTo(".gs-reveal", 
+    { y: 30, opacity: 0 },
+    { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out", delay: 0.2 }
+  );
+
+  // Scroll Reveal Up
+  const revealElements = document.querySelectorAll('.gs-reveal-up');
+  revealElements.forEach((el) => {
+    gsap.fromTo(el,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  });
+
+  // Triad Connections Path Drawing
+  const paths = document.querySelectorAll('.triad-path');
+  if (paths.length > 0) {
+    paths.forEach(path => {
+      const length = path.getTotalLength();
+      gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+      gsap.to(path, {
+        strokeDashoffset: 0,
+        duration: 2,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: ".triad-container",
+          start: "top 60%",
+          end: "bottom 80%",
+          scrub: 1
+        }
+      });
+    });
+  }
+
+  // Magnetic Buttons
+  const magneticBtns = document.querySelectorAll('.btn-magnetic');
+  magneticBtns.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: "power2.out" });
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+    });
+  });
+
+  // 3D Tilt Card Effect (Hero)
+  const tiltCard = document.querySelector('[class~="3d-tilt-card"]');
+  if (tiltCard) {
+    document.addEventListener('mousemove', (e) => {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+      gsap.to(tiltCard, { rotationY: xAxis, rotationX: yAxis, duration: 0.5, ease: "power1.out" });
+    });
+  }
+}
+
+function initCarousel() {
+  if (typeof gsap === 'undefined' || typeof Draggable === 'undefined') return;
+  gsap.registerPlugin(Draggable);
+
+  const container = document.getElementById('software-carousel');
+  const items = [...document.querySelectorAll('.carousel-item')];
+  const prevBtn = document.getElementById('prev-slide');
+  const nextBtn = document.getElementById('next-slide');
+  const dotsContainer = document.getElementById('carousel-dots');
+  
+  if (!container || items.length === 0) return;
+
+  const totalItems = items.length;
+
+  const firstClone = items[0].cloneNode(true);
+  const lastClone = items[totalItems - 1].cloneNode(true);
+  firstClone.classList.add('carousel-clone');
+  lastClone.classList.add('carousel-clone');
+  container.appendChild(firstClone);
+  container.insertBefore(lastClone, container.firstChild);
+  const allItems = [...container.querySelectorAll('.carousel-item')];
+  let currentIndex = 1;
+
+  const getItemWidth = () => allItems[0].getBoundingClientRect().width + 14;
+
+  // Create dots
+  items.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  // GSAP 3D Effect on scroll/drag
+  function update3DEffects() {
+    let closestItem = null;
+    let closestDistance = Infinity;
+
+    allItems.forEach((item) => {
+      // Calculate distance from center of viewport
+      const rect = item.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
+      const windowCenter = window.innerWidth / 2;
+      const dist = center - windowCenter;
+      const absoluteDist = Math.abs(dist);
+
+      if (absoluteDist < closestDistance) {
+        closestDistance = absoluteDist;
+        closestItem = item;
+      }
+      
+      const normalizedDist = Math.max(-1, Math.min(1, dist / windowCenter));
+      
+      gsap.to(item, {
+        rotationY: normalizedDist * 15,
+        z: Math.abs(normalizedDist) * -100,
+        scale: 1 - Math.abs(normalizedDist) * 0.1,
+        opacity: 1 - Math.abs(normalizedDist) * 0.3,
+        duration: 0.5,
+        ease: "power2.out"
+      });
+    });
+
+    allItems.forEach(item => item.classList.toggle('active', item === closestItem));
+  }
+
+  function setDots(logicalIndex) {
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === logicalIndex));
+  }
+
+  function goToPhysicalSlide(index, animate = true) {
+    currentIndex = index;
+    const finish = () => {
+      if (currentIndex === 0) {
+        currentIndex = totalItems;
+        gsap.set(container, { x: -(currentIndex * getItemWidth()) });
+      } else if (currentIndex === totalItems + 1) {
+        currentIndex = 1;
+        gsap.set(container, { x: -getItemWidth() });
+      }
+      setDots((currentIndex - 1 + totalItems) % totalItems);
+      update3DEffects();
+    };
+
+    gsap.to(container, {
+      x: -currentIndex * getItemWidth(),
+      duration: animate ? 0.65 : 0,
+      ease: "power3.inOut",
+      onUpdate: update3DEffects,
+      onComplete: finish
+    });
+  }
+
+  function goToSlide(index) {
+    const logicalIndex = (index + totalItems) % totalItems;
+    goToPhysicalSlide(logicalIndex + 1);
+  }
+
+  function getLogicalIndex() {
+    return (currentIndex - 1 + totalItems) % totalItems;
+  }
+
+  // Draggable integration
+  Draggable.create(container, {
+    type: "x",
+    inertia: true,
+    onDrag: update3DEffects,
+    onThrowUpdate: update3DEffects,
+    onDragEnd: function() {
+      const closest = Math.round(Math.abs(this.x) / getItemWidth());
+      const logicalIndex = (closest - 1 + totalItems) % totalItems;
+      goToPhysicalSlide(logicalIndex + 1);
+    }
+  });
+
+  // Buttons
+  prevBtn.addEventListener('click', () => goToSlide(getLogicalIndex() - 1));
+  nextBtn.addEventListener('click', () => goToSlide(getLogicalIndex() + 1));
+
+  // Initial call
+  update3DEffects();
+
+  // Handle Resize
+  window.addEventListener('resize', () => {
+    // Recalculate itemWidth on resize if needed (responsive CSS might change it)
+    // Simplified for this scope, ideally debounced
+    goToPhysicalSlide(currentIndex, false);
+  });
+
+  goToPhysicalSlide(currentIndex, false);
+}
+
+/* ==========================================================================
+   THREE.JS SCENE (DATA NODES BACKGROUND)
+   ========================================================================== */
+function initThreeJS() {
+  if (typeof THREE === 'undefined') return;
+
+  const canvas = document.getElementById('webgl-canvas');
+  if (!canvas) return;
+
+  const hero = canvas.closest('.hero');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 100);
+  camera.position.z = 24;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setClearColor(0x000000, 0);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const nodeCount = 100;
+  const nodes = Array.from({ length: nodeCount }, () => new THREE.Vector3(
+    (Math.random() - 0.5) * 35,
+    (Math.random() - 0.5) * 17,
+    (Math.random() - 0.5) * 13
+  ));
+  const positions = new Float32Array(nodeCount * 3);
+  nodes.forEach((node, index) => node.toArray(positions, index * 3));
+
+  const nodeGeometry = new THREE.BufferGeometry();
+  nodeGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const nodeMaterial = new THREE.PointsMaterial({
+    color: 0xffffff, size: 0.16, transparent: true, opacity: 0.24,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true
+  });
+  const nodeMesh = new THREE.Points(nodeGeometry, nodeMaterial);
+  scene.add(nodeMesh);
+
+  const edgePositions = [];
+  nodes.forEach((node, index) => {
+    nodes
+      .map((candidate, candidateIndex) => ({ candidate, candidateIndex, distance: node.distanceTo(candidate) }))
+      .filter(({ candidateIndex, distance }) => candidateIndex > index && distance < 6.5)
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 3)
+      .forEach(({ candidate }) => edgePositions.push(node.x, node.y, node.z, candidate.x, candidate.y, candidate.z));
+  });
+  const edgeGeometry = new THREE.BufferGeometry();
+  edgeGeometry.setAttribute('position', new THREE.Float32BufferAttribute(edgePositions, 3));
+  scene.add(new THREE.LineSegments(edgeGeometry, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.07 })));
+
+  const pulseCount = 18;
+  const pulses = Array.from({ length: pulseCount }, () => {
+    const start = Math.floor(Math.random() * nodeCount);
+    let end = Math.floor(Math.random() * nodeCount);
+    while (end === start || nodes[start].distanceTo(nodes[end]) > 6.5) end = Math.floor(Math.random() * nodeCount);
+    return { start, end, progress: Math.random(), speed: 0.08 + Math.random() * 0.12 };
+  });
+  const pulseGeometry = new THREE.BufferGeometry();
+  const pulsePositions = new Float32Array(pulseCount * 3);
+  pulseGeometry.setAttribute('position', new THREE.BufferAttribute(pulsePositions, 3));
+  scene.add(new THREE.Points(pulseGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 0.28, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending, depthWrite: false })));
+
+  let mouseX = 0;
+  let mouseY = 0;
+
+  window.addEventListener('pointermove', (e) => {
+    mouseX = (e.clientX / window.innerWidth) - 0.5;
+    mouseY = (e.clientY / window.innerHeight) - 0.5;
+  });
+
+  const clock = new THREE.Clock();
+
+  function tick() {
+    const elapsedTime = clock.getElapsedTime();
+
+    nodeMesh.rotation.y = elapsedTime * 0.012;
+    nodeMesh.rotation.x = elapsedTime * 0.006;
+    nodeMesh.position.z = Math.sin(elapsedTime * 0.25) * 0.6;
+    camera.position.x += (mouseX * 2.2 - camera.position.x) * 0.035;
+    camera.position.y += (-mouseY * 1.3 - camera.position.y) * 0.035;
+    camera.lookAt(scene.position);
+
+    const pulseAttribute = pulseGeometry.attributes.position;
+    pulses.forEach((pulse, index) => {
+      pulse.progress = (pulse.progress + pulse.speed * 0.016) % 1;
+      pulseAttribute.setXYZ(index, ...nodes[pulse.start].clone().lerp(nodes[pulse.end], pulse.progress).toArray());
+    });
+    pulseAttribute.needsUpdate = true;
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+
+  tick();
+
+  window.addEventListener('resize', () => {
+    const width = hero.clientWidth;
+    const height = hero.clientHeight;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height, false);
+  });
+
+  window.dispatchEvent(new Event('resize'));
+}
+
+/* ==========================================================================
+   FORM HANDLING
+   ========================================================================== */
+function initForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    
+    btn.innerHTML = '<i data-lucide="loader" class="spin"></i> Enviando...';
+    lucide.createIcons();
+    btn.style.opacity = '0.8';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = '<i data-lucide="check"></i> ¡Solicitud Enviada!';
+      btn.classList.add('bg-success');
+      lucide.createIcons();
+      form.reset();
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.classList.remove('bg-success');
+      }, 3000);
+    }, 1500);
+  });
+}
