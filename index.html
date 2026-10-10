@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -40,6 +40,8 @@
           <li><a href="#servicios" class="nav-link">Servicios</a></li>
           <li><a href="#desarrollo" class="nav-link">Proceso</a></li>
           <li><a href="#automatizaciones" class="nav-link">Automatizaciones</a></li>
+          <li><a href="#dashboards" class="nav-link">Dashboards</a></li>
+          <li><a href="#diagnostico" class="nav-link">Diagnóstico</a></li>
           <li><a href="#planes" class="nav-link">Planes</a></li>
         </ul>
 
@@ -146,9 +148,6 @@
 
           <div class="showcase-grid">
             <article class="show-card reveal">
-              <div class="show-card-media">
-                <img src="multimedia/5.jpg" alt="" loading="lazy" />
-              </div>
               <div class="show-card-body">
                 <span class="mono">01 / Data Science</span>
                 <h3>Predicción de riesgo & ventas</h3>
@@ -156,9 +155,6 @@
               </div>
             </article>
             <article class="show-card reveal">
-              <div class="show-card-media">
-                <img src="multimedia/4.jpg" alt="" loading="lazy" />
-              </div>
               <div class="show-card-body">
                 <span class="mono">02 / Business Intelligence</span>
                 <h3>Analítica para decidir</h3>
@@ -166,15 +162,56 @@
               </div>
             </article>
             <article class="show-card reveal">
-              <div class="show-card-media">
-                <img src="multimedia/Neon%20Lines%20art.jpg" alt="" loading="lazy" />
-              </div>
               <div class="show-card-body">
                 <span class="mono">03 / IA Operativa</span>
                 <h3>Automatización que aprende</h3>
                 <p>Software de gestión y procesos inteligentes que reducen fricción mientras tu empresa gana velocidad.</p>
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboards" class="section dashboard-section">
+        <div class="container">
+          <div class="section-header text-center reveal">
+            <span class="eyebrow">Business Intelligence</span>
+            <h2>Dashboards de Gestión <span class="text-gradient">& Intelligence</span></h2>
+            <p class="section-desc">Visualización de datos en tiempo real adaptada a las necesidades operativas de tu negocio.</p>
+          </div>
+
+          <div class="dashboard-carousel reveal" aria-label="Muestra de dashboards" aria-roledescription="carrusel">
+            <div class="dashboard-arc">
+              <article class="dashboard-card" data-position="left" tabindex="0" role="group" aria-roledescription="diapositiva" aria-label="1 de 3: Dashboard ejecutivo">
+                <img src="multimedia/dash%201.jpg" alt="Vista de dashboard ejecutivo con indicadores clave" loading="lazy" />
+                <div class="dashboard-card-copy">
+                  <span class="mono">01 / VISIÓN EJECUTIVA</span>
+                  <h3>Dashboard ejecutivo</h3>
+                  <p>Indicadores clave para entender el estado del negocio en una sola vista.</p>
+                </div>
+              </article>
+              <article class="dashboard-card" data-position="center" tabindex="0" role="group" aria-roledescription="diapositiva" aria-label="2 de 3: Inteligencia de negocio">
+                <img src="multimedia/dash%202.jpg" alt="Vista de dashboard de inteligencia de negocio" loading="lazy" />
+                <div class="dashboard-card-copy">
+                  <span class="mono">02 / BUSINESS INTELLIGENCE</span>
+                  <h3>Inteligencia de negocio</h3>
+                  <p>Métricas conectadas para convertir datos operativos en decisiones claras.</p>
+                </div>
+              </article>
+              <article class="dashboard-card" data-position="right" tabindex="0" role="group" aria-roledescription="diapositiva" aria-label="3 de 3: Monitoreo operacional">
+                <img src="multimedia/dash%203.jpg" alt="Vista de dashboard para monitoreo operacional" loading="lazy" />
+                <div class="dashboard-card-copy">
+                  <span class="mono">03 / OPERACIÓN</span>
+                  <h3>Monitoreo operacional</h3>
+                  <p>Seguimiento en tiempo real de procesos, alertas y resultados del equipo.</p>
+                </div>
+              </article>
+            </div>
+            <div class="dashboard-controls" aria-label="Controles del carrusel">
+              <button type="button" class="icon-btn dashboard-prev" aria-label="Dashboard anterior"><i data-lucide="arrow-left"></i></button>
+              <span class="dashboard-counter" aria-live="polite">02 <span>/ 03</span></span>
+              <button type="button" class="icon-btn dashboard-next" aria-label="Dashboard siguiente"><i data-lucide="arrow-right"></i></button>
+            </div>
           </div>
         </div>
       </section>
@@ -188,7 +225,6 @@
 
           <div class="service-grid">
             <article class="service-card reveal">
-              <img src="multimedia/2.jpg" alt="" loading="lazy" />
               <div class="service-card-content">
                 <span class="mono">01</span>
                 <h3>Landing Pages & Sitios Web Corporativos</h3>
@@ -197,7 +233,6 @@
               </div>
             </article>
             <article class="service-card reveal">
-              <img src="multimedia/Photoshop%20Capsule%20Art.jpg" alt="" loading="lazy" />
               <div class="service-card-content">
                 <span class="mono">02</span>
                 <h3>CRMs & Portales de Clientes Empresariales</h3>
@@ -206,7 +241,6 @@
               </div>
             </article>
             <article class="service-card reveal">
-              <img src="multimedia/Synthetic%20Pores.jpg" alt="" loading="lazy" />
               <div class="service-card-content">
                 <span class="mono">03</span>
                 <h3>ERPs & Software Operativo Integral</h3>
@@ -215,7 +249,6 @@
               </div>
             </article>
             <article class="service-card reveal">
-              <img src="multimedia/descargar.jpg" alt="" loading="lazy" />
               <div class="service-card-content">
                 <span class="mono">04</span>
                 <h3>Cotizadores Interactivos de Alta Conversión</h3>
@@ -250,7 +283,6 @@
 
           <div class="intel-grid">
             <article class="intel-card reveal">
-              <img src="multimedia/4.jpg" alt="" loading="lazy" />
               <div>
                 <span class="mono">01</span>
                 <h3>Business Intelligence & Power BI Empresarial</h3>
@@ -263,7 +295,6 @@
               </div>
             </article>
             <article class="intel-card reveal">
-              <img src="multimedia/Neon%20Lines%20art.jpg" alt="" loading="lazy" />
               <div>
                 <span class="mono">02</span>
                 <h3>Automatización Inteligente de Procesos</h3>
@@ -276,7 +307,6 @@
               </div>
             </article>
             <article class="intel-card reveal">
-              <img src="multimedia/xperience%20fly.jpg" alt="" loading="lazy" />
               <div>
                 <span class="mono">03</span>
                 <h3>Ingeniería de Datos & Arquitectura Corporativa</h3>
@@ -367,29 +397,43 @@
 
           <div class="auto-grid">
             <article class="auto-card reveal">
-              <img src="multimedia/Synthetic%20Pores.jpg" alt="" loading="lazy" />
               <span class="mono">01 · Reportes</span>
               <h3>Excel y cierres de mes</h3>
               <p>Eliminamos el copy-paste, las versiones cruzadas y los reportes armados a mano cada fin de mes.</p>
             </article>
             <article class="auto-card reveal">
-              <img src="multimedia/Neon%20Lines%20art.jpg" alt="" loading="lazy" />
               <span class="mono">02 · Canales</span>
               <h3>Correo, WhatsApp y alertas</h3>
               <p>Flujos que notifican, clasifican y responden sin que alguien tenga que vigilar bandejas todo el día.</p>
             </article>
             <article class="auto-card reveal">
-              <img src="multimedia/2.jpg" alt="" loading="lazy" />
               <span class="mono">03 · Operación</span>
               <h3>Apps, cotizaciones y cargas</h3>
               <p>Conectamos cotizadores, CRMs y bases de precios para que las propuestas salgan en segundos.</p>
             </article>
             <article class="auto-card reveal">
-              <img src="multimedia/5.jpg" alt="" loading="lazy" />
               <span class="mono">04 · Orquestación</span>
               <h3>Python, Zapier y Make</h3>
               <p>Scripts e integraciones que unen tus herramientas y dejan una única fuente de verdad automatizada.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="diagnostico" class="section diagnostic-section">
+        <div class="container">
+          <div class="section-header text-center reveal">
+            <span class="eyebrow">Tu siguiente nivel, con claridad</span>
+            <h2>Diagnóstico de madurez <span class="text-gradient">operativa</span></h2>
+            <p class="section-desc">Completa cinco pasos rápidos y recibe una recomendación de plan, inversión, entregables y próximos pasos para tu operación.</p>
+          </div>
+
+          <div class="diagnostic-shell reveal">
+            <div class="diagnostic-teaser">
+              <span class="mono">XPERIENCE · PERFILADOR DE OPERACIÓN</span>
+              <p>¿Listo para descubrir qué plan encaja con tu negocio? Responde un breve diagnóstico y conoce una ruta inicial, sin compromiso.</p>
+              <button type="button" class="btn btn-primary" data-open-diagnostic>Iniciar diagnóstico <i data-lucide="arrow-right"></i></button>
+            </div>
           </div>
         </div>
       </section>
@@ -403,7 +447,8 @@
           </div>
 
           <div class="pricing-grid">
-            <article class="pricing-card reveal">
+            <article class="pricing-card reveal" data-plan-key="piloto" data-plan-setup="Setup desde $2M COP" data-plan-saas="+ SaaS mensual $290k COP/mes" data-plan-timeline="5–10 días" data-plan-min="5" data-plan-max="8" data-plan-profile="Tu operación puede empezar con una mejora concreta: automatizar una tarea repetitiva o visualizar indicadores clave sin una implementación compleja.">
+              <img class="pricing-image" src="multimedia/Synthetic%20Pores.jpg" alt="Textura abstracta para el plan Piloto de automatización" loading="lazy" />
               <div class="pricing-header">
                 <h3>Piloto</h3>
                 <p>Automatiza un proceso específico y prueba el impacto.</p>
@@ -427,8 +472,9 @@
               <a href="#" class="btn btn-outline btn-full wa-link" data-plan="Piloto">Empezar Piloto</a>
             </article>
 
-            <article class="pricing-card featured reveal">
+            <article class="pricing-card featured reveal" data-plan-key="crecimiento" data-plan-setup="Setup desde $5M COP" data-plan-saas="+ SaaS mensual $690k COP/mes" data-plan-timeline="2–4 semanas" data-plan-min="9" data-plan-max="12" data-plan-profile="Tu empresa está lista para conectar más procesos, herramientas y datos con una operación digital integrada.">
               <div class="popular-badge">Más popular</div>
+              <img class="pricing-image" src="multimedia/Photoshop%20Capsule%20Art.jpg" alt="Arte digital para el plan Crecimiento y su ecosistema integrado" loading="lazy" />
               <div class="pricing-header">
                 <h3>Crecimiento</h3>
                 <p>Para empresas listas para escalar su ecosistema digital.</p>
@@ -452,7 +498,8 @@
               <a href="#" class="btn btn-primary btn-full wa-link" data-plan="Crecimiento">Hablar de Crecimiento</a>
             </article>
 
-            <article class="pricing-card reveal">
+            <article class="pricing-card reveal" data-plan-key="enterprise" data-plan-setup="Setup A medida" data-plan-saas="SaaS mensual A medida" data-plan-timeline="4–8 semanas" data-plan-min="13" data-plan-max="15" data-plan-profile="Tu operación requiere una solución de mayor alcance, con integraciones críticas, software a medida y acompañamiento especializado.">
+              <img class="pricing-image" src="multimedia/Neon%20Lines%20art.jpg" alt="Arte de líneas digitales para el plan Enterprise" loading="lazy" />
               <div class="pricing-header">
                 <h3>Enterprise</h3>
                 <p>Operaciones grandes, críticas y a medida.</p>
@@ -546,12 +593,27 @@
     </footer>
   </div>
 
+  <dialog class="diagnostic-modal" id="diagnostic-modal" aria-labelledby="diagnostic-modal-title">
+    <div class="diagnostic-modal-panel">
+      <button type="button" class="diagnostic-modal-close" aria-label="Cerrar diagnóstico"><i data-lucide="x"></i></button>
+      <div class="diagnostic-intro">
+        <span class="mono" id="diagnostic-modal-title">XPERIENCE · PERFILADOR DE OPERACIÓN</span>
+        <p>Un diagnóstico breve para encontrar el plan más adecuado para tu operación.</p>
+      </div>
+      <div class="diagnostic-progress" role="progressbar" aria-label="Progreso del diagnóstico" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1">
+        <div class="diagnostic-progress-fill"></div>
+      </div>
+      <div class="diagnostic-progress-label" aria-live="polite">Paso 1 / 5 <span>Perfil y operación</span></div>
+      <div id="diagnostic-step" class="diagnostic-step" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </dialog>
+
   <a href="https://wa.me/573022482933?text=Hola%20Xperience%20Tech%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20sin%20costo." class="wa-float btn-magnetic" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
   </a>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
