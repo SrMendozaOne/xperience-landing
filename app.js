@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initTabs();
   initWhatsAppPlans();
   initForm();
+  initConversionTracking();
   initHeroArrows();
   initDashboardCarousel();
   initDiagnosticQuiz();
@@ -176,20 +177,92 @@ function initForm() {
   const form = document.getElementById("contactForm");
   if (!form) return;
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = "Enviando...";
-    setTimeout(() => {
-      btn.textContent = "¡Solicitud enviada!";
-      form.reset();
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.disabled = false;
-      }, 2800);
-    }, 900);
+  const phoneInput = form.querySelector("#phone");
+  const status = form.querySelector("#contact-form-status");
+  const phonePattern = /^\+?\d{7,15}$/;
+
+  const validatePhone = () => {
+    if (!phoneInput.value.trim()) {
+      phoneInput.setCustomValidity("");
+      return;
+    }
+    const isValid = phonePattern.test(phoneInput.value.trim());
+    phoneInput.setCustomValidity(isValid ? "" : "Ingresa un teléfono válido con indicativo internacional y entre 7 y 15 dígitos.");
+  };
+
+  phoneInput.addEventListener("input", validatePhone);
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    validatePhone();
+
+    const honeypot = form.querySelector("#company-website");
+    if (honeypot.value.trim()) {
+      status.textContent = "No fue posible procesar el formulario.";
+      return;
+    }
+    if (!form.reportValidity()) return;
+
+    const name = form.querySelector("#name").value.trim();
+    const email = form.querySelector("#email").value.trim();
+    const phone = phoneInput.value.trim();
+    const process = form.querySelector("#process").value.trim();
+    const message = [
+      "Hola Xperience Tech, quiero solicitar un diagnóstico.",
+      "",
+      `Nombre / empresa: ${name}`,
+      `Correo: ${email}`,
+      `Teléfono / WhatsApp: ${phone}`,
+      "",
+      "¿Qué necesito resolver?",
+      process
+    ].join("\n");
+    const whatsappUrl = new URL("https://wa.me/573022482933");
+    whatsappUrl.searchParams.set("text", message);
+
+    trackConversion("contact_form_whatsapp", { method: "whatsapp" });
+    status.replaceChildren(
+      document.createTextNode("El mensaje está listo. Confirma su envío en WhatsApp o "),
+      Object.assign(document.createElement("a"), {
+        href: whatsappUrl.href,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        textContent: "ábrelo desde aquí."
+      })
+    );
+    window.open(whatsappUrl.href, "_blank", "noopener,noreferrer");
+  });
+}
+
+function trackConversion(eventName, parameters = {}) {
+  window.dispatchEvent(new CustomEvent("xperience:conversion", {
+    detail: { eventName, ...parameters }
+  }));
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, parameters);
+  } else if (window.dataLayer && typeof window.dataLayer.push === "function") {
+    window.dataLayer.push({ event: eventName, ...parameters });
+  }
+
+  if (typeof window.fbq === "function") {
+    window.fbq("trackCustom", eventName, parameters);
+  }
+}
+
+function initConversionTracking() {
+  document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element
+      ? event.target.closest('a[href*="wa.me"], [data-open-diagnostic]')
+      : null;
+    if (!target) return;
+
+    if (target.matches("[data-open-diagnostic]")) {
+      trackConversion("diagnostic_open");
+    } else {
+      trackConversion("whatsapp_click", {
+        plan: target.dataset.plan || "general"
+      });
+    }
   });
 }
 
